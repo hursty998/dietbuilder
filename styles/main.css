@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     outline: none;
 }
 header {
@@ -12,23 +13,73 @@ header {
     background-color: #292929;
 }
 
+
 @media (max-width: 1022px){ /* for mobile devices smaller than 1024 pixels, up to a landscape ipad */
 
 }
 
 @media (min-width: 1023px){
+    button{
+        background-color: #F0754F;
+        color: white;
+        height: 40px;
+        min-width: 90px;
+        border: none;
+        border-radius: 10px;
+        font-size: 30px;
+    }
+
     body{
+        position: absolute;
 		background-image: url(assets/desktop-bg.jpg);
         background-size: cover;
+        width: 100%;
+        height: 100%;
 	}
 	header img{
 		padding-top: 5px;
        	position:absolute;
 		left:40%;
     }
-	main{
-		width:100%;
-        /*background-color: rgba(0, 0, 0, .65);
-        background-blend-mode: darken;
-        color: white;*/
+    main{
+        width: 100%;
+        height: 100%;
+    }
+	.container{
+        padding: 5% 20px 20px 20px;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+    }
+    #welcome-page{
+        position: relative;
+        display: inline-block;
+        width: 70%;
+        height: 75%;
+        min-height: 320px;
+        min-width: 695px;
+        background-color: rgb(255, 255, 255, 0.6);
+        border-radius: 60px;
+        padding: 30px 80px 30px 80px;
+        text-align: center;
+    }
+    #welcome-page h1{
+        font-size: 45px;
+    }
+    #welcome-page p{
+        margin-top: 40px;
+        font-size: 35px;
+    }
+    #begin-btn{
+        position: absolute;
+        bottom: 13%;
+        left: 25%;
+        width: 50%;
+        height: 18%;
+        font-size: 45px;
+    }
+}
+
+#welcome-page{
+    display: none;
 }
