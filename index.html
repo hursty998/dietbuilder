@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="styles/main.css" rel="stylesheet" />
     <script src="scripts/main.js"></script>
+    <script src="https://kit.fontawesome.com/08ca90ab4f.js" crossorigin="anonymous"></script>
     <title>Diet Builder</title>
 </head>
 <body>
@@ -15,13 +16,21 @@
     </header>
     <main>
       <div class="container">
-        <div id="welcome-page">
+        <div id="welcome-page" class="white-box">
           <h1>Welcome To the Diet Builder</h1>
           <p>Calculate your calories and generate a sample diet plan now</p>
-          <button id="begin-btn">Begin</button>
+          <button id="begin-btn" onclick="begin()">Begin</button>
         </div>
-        <div id="details1-page">
-          
+        <div id="details1-page" class="white-box">
+          <h1>Please Enter the Following Details</h1>
+          <button class="radio1" id="opt-male" onclick="radio('opt-male','opt-female',0,0); changeGender('male')" ><i class="fas fa-mars"></i><br> Male</button>
+          <button id="sex"><strong>Sex</strong> </button>
+          <button class="radio2" id="opt-female" onclick="radio('opt-female','opt-male',0,0); changeGender('female')"><i class="fas fa-venus"></i><br> Female</button><br>
+          <div class="inline-textbox" id="age-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeAge()" type="number" min="10" max="80" step="1" placeholder="##" name="age" id="age"><div class="keep-right">Years old</div></div></div>
+          <button class="next" onclick="next(1)">Next</button>
+        </div>
+        <div id="details2-page" class="white-box">
+
         </div>
       </div>
     </main>
