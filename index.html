@@ -30,8 +30,19 @@
           <button class="next" onclick="next(1)">Next</button>
         </div>
         <div id="details2-page" class="white-box">
-            <div class="inline-textbox" id="height-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeAge()" type="number" min="150" max="250" step="1" placeholder="##" name="age" id="age"><div class="keep-right">cm</div></div></div>
-            <div class="inline-textbox" id="weight-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeAge()" type="number" min="40" max="140" step="1" placeholder="##" name="age" id="age"><div class="keep-right">kg</div></div></div>
+          <h1>Please Enter the Following Details</h1>
+          <div class="inline-textbox" id="height-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeHeight()" type="number" min="130" max="250" step="1" placeholder="##" name="height" id="height"><div class="keep-right">cm</div></div></div>
+          <div class="inline-textbox" id="weight-textbox"> <div><strong>and</strong> </div><div class="border"><input onchange="changeWeight()" type="number" min="40" max="140" step="1" placeholder="##" name="weight" id="weight"><div class="keep-right">kg</div></div></div>
+          <div id="activity-dropdown"><strong>Activity Level</strong></div>
+          <div id="border1">Moderatly</div>
+          
+          <button class="next" onclick="next(2)">Next</button>
+          <button class="back" onclick="next(0)">Back</button>
+        </div>
+        <div id="details3-page" class="white-box">
+            <button class="next" onclick="next(3)">Next</button>
+            <button class="back" onclick="next(1)">Back</button>
+
         </div>
       </div>
     </main>

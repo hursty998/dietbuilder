@@ -30,19 +30,34 @@ function next(x){
         if (age>13 && age<61){
            document.getElementById("details1-page").style.display="none"
            document.getElementById("details2-page").style.display="block" 
+           document.getElementById("details3-page").style.display="none"
         }
         else{
             alert("You have to be between the ages 14 and 60 to use this tool")
         }
     }
     else if (x==2){
+        if(height>129 && height<251){
+            if (weight>39 && weight<141){
+                document.getElementById("details2-page").style.display="none"
+                document.getElementById("details3-page").style.display="block"
+                document.getElementById("confirmation-page").style.display="none" 
+            }
+            else{
+                alert("You have to be between the weight of 40 and 140 kg to use this tool")
+            }
+        }
+        else{
+            alert("You have to be between the height of 130 and 250 cm to use this tool")
+        }
 
     }
     else if (x==3){
 
     }
-    else{
-
+    else if (x==0){
+        document.getElementById("details1-page").style.display="block"
+        document.getElementById("details2-page").style.display="none" 
     }
 }
 
@@ -58,10 +73,27 @@ function changeGender(sexIn){
     sex=sexIn
 }
 function changeAge(){
+    console.log(age)
     if(document.getElementById("age").value == ""){
         age=0
     }
     else{
         age=document.getElementById("age").value 
+    }
+}
+function changeHeight(){
+    if(document.getElementById("height").value == ""){
+        height=0
+    }
+    else{
+        height=document.getElementById("height").value 
+    }
+}
+function changeWeight(){
+    if(document.getElementById("weight").value == ""){
+        weight=0
+    }
+    else{
+        weight=document.getElementById("weight").value 
     }
 }
