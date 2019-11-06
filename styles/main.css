@@ -179,10 +179,13 @@ header {
         height: 50px;
     }
     #activity-level{
+        -webkit-appearance: none;
+        -moz-appearance: none;
         width: 100%;
         border: none;
         height: 100%;
         font-size: 130%;
+        -webkit-appearance: none;
     }
     
 
