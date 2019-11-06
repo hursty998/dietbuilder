@@ -28,7 +28,7 @@ header {
     body {
         position: absolute;
         width: 100%;
-        height: 100vh;
+        height: 100%;
     }
 
     header img {
@@ -177,6 +177,12 @@ header {
         width: 85%;
         bottom: 27%;
         height: 50px;
+    }
+    #activity-level{
+        width: 100%;
+        border: none;
+        height: 100%;
+        font-size: 130%;
     }
     
 
