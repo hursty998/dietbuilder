@@ -66,8 +66,8 @@ var sex="male"
 var age=0
 var height
 var weigth
-var activity="low"
-var aim
+var activity=1
+var aim=1
 var diet
 
 function changeGender(sexIn){
@@ -101,4 +101,7 @@ function changeWeight(){
 
 function changeActivity(){
     activity=document.getElementById("activity-level").value
+}
+function changeAim(aim1){
+    aim=aim1
 }

@@ -88,7 +88,7 @@ header {
     .radio1{
         display: inline-block;
         background-color: #007BFF;
-        height: 17%;
+        height:17%;
         width: 30%;
         font-size: 130%;
     }
@@ -191,7 +191,39 @@ header {
         font-size: 130%;
         
     }
-    
+    #radio-aim{
+        height: 17%;
+        font-size: 90%;
+        margin-top: 40px;
+    }
+    #radio-diet{
+        height: 34%;
+        font-size: 78%;
+        margin-top: 40px;
+    }
+    #radio-aim .radio1, #radio-aim .radio2{
+        height: 100%;
+    }
+    #radio-diet .radio1, #radio-diet .radio2{
+        height: 50%;
+    }
+    #aim-text{
+        margin-top: 5px;
+        position: absolute;
+        left: 7%;
+        font-size: 130%;
+    }
+    #diet-text{
+        margin-top: 5px;
+        position: absolute;
+        left: 7%;
+        font-size: 130%;
+    }
+    #radio-diet #opt-none{
+        height: 30%; 
+        width: 60%; 
+        margin-top: 10px;
+    }
 
 }
 @media (min-width: 1023px){
@@ -369,6 +401,30 @@ header {
         border: none;
         height: 100%;
         font-size: 130%;
+    }
+    #aim-text, #diet-text{
+        position: absolute;
+        left: 8%;
+        font-size: 170%;
+        margin-top: 20px;
+    }
+    #radio-aim{
+        margin-left: 50px;
+    }
+    #radio-aim .radio1, #radio-aim .radio2{
+        font-size: 130%;
+        width: 25%;
+        margin-top: 20px;
+        margin-left: 30px;
+        margin-bottom: 20px;
+    }
+    #radio-diet{
+        margin-left: 50px;
+    }
+    #radio-diet .radio1, #radio-diet .radio2{
+        font-size: 130%;
+        width: 20%;
+        margin-left: 4%;
     }
 }
 

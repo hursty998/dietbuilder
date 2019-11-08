@@ -25,7 +25,7 @@
           <h1>Please Enter the Following Details</h1>
           <button class="radio1" id="opt-male" onclick="radio('opt-male','opt-female',0,0); changeGender('male')" ><i class="fas fa-mars"></i><br> Male</button>
           <button id="sex"><strong style="font-size: 90%;">Sex</strong> </button>
-          <button class="radio2" id="opt-female" onclick="radio('opt-female','opt-male',0,0); changeGender('female')"><i class="fas fa-venus"></i><br> Female</button><br>
+          <button class="radio2" id="opt-female" onclick="radio('opt-female','opt-male',0,0); changeGender('female')"><i class="fas fa-venus"></i><br> Female</button>
           <div class="inline-textbox" id="age-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeAge()" type="number" min="14" max="60" step="1" placeholder="##" name="age" id="age"><div class="keep-right">Years old</div></div></div>
           <button class="next" onclick="next(1)">Next</button>
         </div>
@@ -37,9 +37,9 @@
           <div id="border1">
             <i class="fas fa-chevron-down" style="position: absolute; left:85%; bottom: 40%;"></i>
             <select name="activity level" id="activity-level" onchange="changeActivity()">
-              <option value="low">Low</option>
-              <option value="moderately">Moderately</option>
-              <option value="high">High</option>
+              <option value="1">Low</option>
+              <option value="2">Moderately</option>
+              <option value="3">High</option>
             </select>
           </div>
           
@@ -47,6 +47,20 @@
           <button class="back" onclick="next(0)">Back</button>
         </div>
         <div id="details3-page" class="white-box">
+            <h1>Please Enter the Following Details</h1>
+            <strong id="aim-text">Aim:</strong>
+            <div id="radio-aim">
+              <button class="radio1" id="opt-lose" onclick="radio('opt-lose','opt-maintain','opt-build',0); changeAim(1)" ><i class="fas fa-bread-slice"></i><br> Lose Weight</button>
+              <button class="radio2" id="opt-maintain" onclick="radio('opt-maintain','opt-lose','opt-build',0); changeAim(2)" ><i class="far fa-thumbs-up"></i><br> Maintain Weight</button>
+              <button class="radio2" id="opt-build" onclick="radio('opt-build','opt-maintain','opt-lose',0); changeAim(3)" ><i class="fas fa-expand-arrows-alt"></i><br> Build Muscle</button>
+            </div>
+            <strong id="diet-text">Diet:</strong>
+            <div id="radio-diet">
+                <button class="radio1" id="opt-vegan" onclick="radio('opt-vegan','opt-vegitarian','opt-gluten','opt-none'); changeDiet('vegan')" ><i class="fas fa-seedling"></i><br> Vegan</button>
+                <button class="radio2" id="opt-vegitarian" onclick="radio('opt-vegitarian','opt-vegan','opt-gluten','opt-none'); changeDiet('vegetarian')" ><i class="fas fa-carrot"></i><br> Vegetarian</button>
+                <button class="radio2" style="font-size: 120%;" id="opt-gluten" onclick="radio('opt-gluten','opt-vegan','opt-vegitarian','opt-none'); changeDiet('gluten')" ><i class="fas fa-bread-slice"></i><br> Gluten Free</button>
+                <button class="radio2" id="opt-none" onclick="radio('opt-none','opt-vegan','opt-vegitarian','opt-gluten'); changeDiet('none')" ><i class="far fa-sticky-note"></i><br> None</button>
+            </div>
             <button class="next" onclick="next(3)">Next</button>
             <button class="back" onclick="next(1)">Back</button>
 
