@@ -58,6 +58,7 @@ header {
         margin-left: auto;
         margin-right: auto;
         height: 53%;
+        min-height: 53%;
         width: 75%;
         bottom:8%;
     }
@@ -185,7 +186,7 @@ header {
         border: none;
         height: 100%;
         font-size: 130%;
-        -webkit-appearance: none;
+        
     }
     
 
