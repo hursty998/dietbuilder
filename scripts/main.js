@@ -39,6 +39,7 @@ function next(x){
     else if (x==2){
         if(height>129 && height<251){
             if (weight>39 && weight<141){
+                console.log(height, weight, activity)
                 document.getElementById("details2-page").style.display="none"
                 document.getElementById("details3-page").style.display="block"
                 document.getElementById("confirmation-page").style.display="none" 
@@ -65,7 +66,7 @@ var sex="male"
 var age=0
 var height
 var weigth
-var activity
+var activity="low"
 var aim
 var diet
 
@@ -96,4 +97,8 @@ function changeWeight(){
     else{
         weight=document.getElementById("weight").value 
     }
+}
+
+function changeActivity(){
+    activity=document.getElementById("activity-level").value
 }

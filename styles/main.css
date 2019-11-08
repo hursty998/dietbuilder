@@ -340,8 +340,35 @@ header {
         left: 21%;
         bottom: 55%;
     }
-    #activity-level{
+    #activity-dropdown{
+        position: absolute;
+        width: 100%;
+        font-size: 160%;
+        bottom: 33%;
+    }
+    #activity-dropdown strong{
+        float: left;
+    }
+    #border1{
+        position: absolute;
+        border: black solid 1px ;
+        border-radius: 10px;
+        padding: 5px 10px 5px 20px;
+        margin-left: 18%;
+        width: 65%;
         bottom: 30%;
+        height: 50px;
+    }
+    #activity-level{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -ms-appearance: none;
+        background: transparent;
+        width: 100%;
+        border: none;
+        height: 100%;
+        font-size: 130%;
     }
 }
 
