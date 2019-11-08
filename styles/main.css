@@ -58,7 +58,6 @@ header {
         margin-left: auto;
         margin-right: auto;
         height: 52%;
-        min-height: 52%;
         width: 75%;
         bottom:6%;
     }
@@ -84,6 +83,7 @@ header {
     }
     #details1-page, #details2-page, #details3-page,#confirmation-page{
         height: 70%;
+        min-height: 395px;
     }
     .radio1{
         display: inline-block;
