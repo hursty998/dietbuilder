@@ -54,7 +54,12 @@ function next(x){
 
     }
     else if (x==3){
-
+        document.getElementById("details3-page").style.display="none"
+        document.getElementById("confirmation-page").style.display="block"
+    }
+    else if (x==4){
+        document.getElementById("confirmation-page").style.display="none"
+        document.getElementById("results1-page").style.display="block"
     }
     else if (x==0){
         document.getElementById("details1-page").style.display="block"
@@ -62,16 +67,17 @@ function next(x){
     }
 }
 
-var sex="male"
+var sex="Male"
 var age=0
 var height
 var weigth
-var activity=1
-var aim=1
-var diet
+var activity="Low"
+var aim="Lose Weight"
+var diet="Vegan"
 
 function changeGender(sexIn){
     sex=sexIn
+    document.getElementById("sex1").innerText=sex
 }
 function changeAge(){
     console.log(age)
@@ -81,6 +87,7 @@ function changeAge(){
     else{
         age=document.getElementById("age").value 
     }
+    document.getElementById("age1").innerText=age
 }
 function changeHeight(){
     if(document.getElementById("height").value == ""){
@@ -89,6 +96,7 @@ function changeHeight(){
     else{
         height=document.getElementById("height").value 
     }
+    document.getElementById("height1").innerText=height
 }
 function changeWeight(){
     if(document.getElementById("weight").value == ""){
@@ -97,11 +105,18 @@ function changeWeight(){
     else{
         weight=document.getElementById("weight").value 
     }
+    document.getElementById("weight1").innerText=weight
 }
 
 function changeActivity(){
     activity=document.getElementById("activity-level").value
+    document.getElementById("activity1").innerText=activity
 }
 function changeAim(aim1){
     aim=aim1
+    document.getElementById("aim1").innerText=aim
+}
+function changeDiet(diet1){
+    diet=diet1
+    document.getElementById("diet1").innerText=diet
 }

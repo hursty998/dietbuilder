@@ -224,6 +224,17 @@ header {
         width: 60%; 
         margin-top: 10px;
     }
+    .left-col{
+        float: left;
+        font-size: 180%;
+        padding-left: 20px;
+    }
+    .right1-col{
+        float: right;
+        color: grey;
+        font-size: 180%;
+        padding-right: 20px;
+    }
 
 }
 @media (min-width: 1023px){
@@ -431,6 +442,6 @@ header {
 #welcome-page{
     /*display: none;*/
 }
-#details1-page, #details2-page, #details3-page{
+#details1-page, #details2-page, #details3-page, #confirmation-page, #results1-page{
     display: none;
 }
