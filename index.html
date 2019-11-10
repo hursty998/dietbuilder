@@ -37,9 +37,9 @@
           <div id="border1">
             <i class="fas fa-chevron-down" style="position: absolute; left:85%; bottom: 40%;"></i>
             <select name="activity level" id="activity-level" onchange="changeActivity()">
-              <option value="1">Low</option>
-              <option value="2">Moderately</option>
-              <option value="3">High</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Moderately</option>
+              <option value="High">High</option>
             </select>
           </div>
           
@@ -68,13 +68,17 @@
         <div id="confirmation-page" class="white-box">
           <h1>Please Check Your Information</h1>
           <p style="color: grey; margin-bottom: 10px;">You cannot go back after confirmation</p>
-          <div class="left-col">Sex:</div><div class="right1-col" id="sex1"></div><br><br>
-          <div class="left-col">Age:</div><div class="right1-col" id="age1"></div><br><br>
-          <div class="left-col">Height:</div><div class="right1-col" id="height1"></div><br><br>
-          <div class="left-col">Weight:</div><div class="right1-col" id="weight1"></div><br><br>
-          <div class="left-col">Activeness:</div><div class="right1-col" id="activity1"></div><br><br>
-          <div class="left-col">Aim:</div><div class="right1-col" id="aim1"></div><br><br>
-          <div class="left-col">Diet:</div><div class="right1-col" id="diet1"></div><br><br>
+         <div id="col-1">
+            <div class="left-col">Sex:</div><div class="right1-col" id="sex1"></div><br><br>
+            <div class="left-col up1">Age:</div><div class="right1-col up1" id="age1"></div><br><br>
+            <div class="left-col up2">Height:</div><div class="right1-col up2" id="height1"></div><br><br>
+            <div class="left-col up3">Weight:</div><div class="right1-col up3" id="weight1"></div><br><br>
+         </div>
+          <div id="col-2">
+            <div class="left-col">Activeness:</div><div class="right1-col" id="activity1"></div><br><br>
+            <div class="left-col up1">Aim:</div><div class="right1-col up1" id="aim1"></div><br><br>
+            <div class="left-col up2">Diet:</div><div class="right1-col up2" id="diet1"></div><br><br>
+          </div>
           <button class="next" onclick="next(4)">Confirm</button>
           <button class="back" onclick="next(2)">Back</button>
         </div>

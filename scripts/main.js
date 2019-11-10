@@ -1,3 +1,11 @@
+var sex="Male"
+var age=0
+var height
+var weigth
+var activity="Low"
+var aim="Lose Weight"
+var diet="Vegan"
+
 function begin(){
     document.getElementById("welcome-page").style.display="none"
     document.getElementById("details1-page").style.display="block"
@@ -31,6 +39,7 @@ function next(x){
            document.getElementById("details1-page").style.display="none"
            document.getElementById("details2-page").style.display="block" 
            document.getElementById("details3-page").style.display="none"
+           document.getElementById("sex1").innerText=sex       
         }
         else{
             alert("You have to be between the ages 14 and 60 to use this tool")
@@ -39,7 +48,7 @@ function next(x){
     else if (x==2){
         if(height>129 && height<251){
             if (weight>39 && weight<141){
-                console.log(height, weight, activity)
+                document.getElementById("activity1").innerText=activity
                 document.getElementById("details2-page").style.display="none"
                 document.getElementById("details3-page").style.display="block"
                 document.getElementById("confirmation-page").style.display="none" 
@@ -54,6 +63,8 @@ function next(x){
 
     }
     else if (x==3){
+        document.getElementById("aim1").innerText=aim
+        document.getElementById("diet1").innerText=diet        
         document.getElementById("details3-page").style.display="none"
         document.getElementById("confirmation-page").style.display="block"
     }
@@ -67,13 +78,7 @@ function next(x){
     }
 }
 
-var sex="Male"
-var age=0
-var height
-var weigth
-var activity="Low"
-var aim="Lose Weight"
-var diet="Vegan"
+
 
 function changeGender(sexIn){
     sex=sexIn
@@ -96,7 +101,7 @@ function changeHeight(){
     else{
         height=document.getElementById("height").value 
     }
-    document.getElementById("height1").innerText=height
+    document.getElementById("height1").innerText=height+" cm"
 }
 function changeWeight(){
     if(document.getElementById("weight").value == ""){
@@ -105,7 +110,7 @@ function changeWeight(){
     else{
         weight=document.getElementById("weight").value 
     }
-    document.getElementById("weight1").innerText=weight
+    document.getElementById("weight1").innerText=weight+" kg"
 }
 
 function changeActivity(){
