@@ -11,25 +11,25 @@ function begin(){
     document.getElementById("details1-page").style.display="block"
 }
 
-function radio(in1, in2, in3, in4){
-    var z=2
-    el1=document.getElementById(in1)
-    el2=document.getElementById(in2)
-    if (in3!=0 && in4!=0){
-        z=4
+function radio(in1, in2, in3, in4){ //taking the 4 IDs of the elements involved
+    var z=2 //this will be the number going into the for loop
+    el1=document.getElementById(in1) //this is the element that is selected
+    el2=document.getElementById(in2) //the other elements will all be changed to unselected
+    if (in3!=0 && in4!=0){ //if 4 IDs are entered into the function
+        z=4 //as there are 4 elements, the for loop needs to loop four times
         el3=document.getElementById(in3)
         el4=document.getElementById(in4)
     }
-    else if(in3!=0){
-        z=3
+    else if(in3!=0){ //if 3 IDs are entered into the function
+        z=3 //as there are 3 elements, the for loop needs to loop 3 times
         el3=document.getElementById(in3)
     }
-    for (i=1;i<=z;i++){
-        if(eval("el"+i).classList.contains('radio1')==true){
-            eval("el"+i).classList.remove('radio1')
-            eval("el"+i).classList.add('radio2')
-            eval("el"+1).classList.remove('radio2')
-            eval("el"+1).classList.add('radio1')
+    for (i=1;i<=z;i++){ //for loop starting at 1 and going to integer z
+        if(eval("el"+i).classList.contains('radio1')==true){ //if 'el'i item is selected
+            eval("el"+i).classList.remove('radio1') //remove the selected styling class
+            eval("el"+i).classList.add('radio2') //add unselected styling class
+            eval("el"+1).classList.remove('radio2') //remove unselected class from element being selected 
+            eval("el"+1).classList.add('radio1') //add selected class to element being selected (''el1')
         }
     }
 }

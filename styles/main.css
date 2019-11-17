@@ -470,9 +470,6 @@ header {
     }
 }
 
-#welcome-page{
-    /*display: none;*/
-}
 #details1-page, #details2-page, #details3-page, #confirmation-page, #results1-page{
     display: none;
 }
