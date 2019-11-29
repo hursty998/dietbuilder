@@ -388,6 +388,7 @@ header {
         width: 100%;
         font-size: 160%;
         bottom: 33%;
+        left: 5%;
     }
     #activity-dropdown strong{
         float: left;
