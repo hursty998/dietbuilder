@@ -6,10 +6,10 @@ var activity="Low"
 var aim="Lose Weight"
 var diet="Vegan"
 
-function begin(){
+/*function begin(){
     document.getElementById("welcome-page").style.display="none"
     document.getElementById("details1-page").style.display="block"
-}
+}*/
 
 function radio(in1, in2, in3, in4){ //taking the 4 IDs of the elements involved
     var z=2 //this will be the number going into the for loop
@@ -34,7 +34,12 @@ function radio(in1, in2, in3, in4){ //taking the 4 IDs of the elements involved
     }
 }
 function next(x){
-    if (x==1){
+    if (x == 0) {
+        document.getElementById("details1-page").style.display = "block"
+        document.getElementById("details2-page").style.display = "none"
+        document.getElementById("welcome-page").style.display = "none"
+    }
+    else if (x == 1) {
         if (age>13 && age<61){
            document.getElementById("details1-page").style.display="none"
            document.getElementById("details2-page").style.display="block" 
@@ -72,10 +77,7 @@ function next(x){
         document.getElementById("confirmation-page").style.display="none"
         document.getElementById("results1-page").style.display="block"
     }
-    else if (x==0){
-        document.getElementById("details1-page").style.display="block"
-        document.getElementById("details2-page").style.display="none" 
-    }
+    
 }
 
 
