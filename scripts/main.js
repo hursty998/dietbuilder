@@ -1,7 +1,7 @@
 var sex="Male"
 var age=0
-var height
-var weigth
+var height=0
+var weigth=0
 var activity="Low"
 var aim="Lose Weight"
 var diet="Vegan"
@@ -87,7 +87,6 @@ function changeGender(sexIn){
     document.getElementById("sex1").innerText=sex
 }
 function changeAge(){
-    console.log(age)
     if(document.getElementById("age").value == ""){
         age=0
     }
