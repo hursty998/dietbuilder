@@ -235,6 +235,14 @@ header {
         font-size: 140%;
         padding-right: 20px;
     }
+    #results-page{
+        height: 70%;
+    }
+    #results-mob{
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 130%;
+    }
 
 }
 @media (min-width: 1023px){
@@ -469,9 +477,21 @@ header {
     .up3{
         margin-top: -48px;
     }
+    
+    #results-desk{
+        position: absolute;
+        padding-top: 4%;
+        font-size: 130%;
+        line-height: 200%;
+        left: 50%;
+    }
+
     #pie-chart{
-        width: 100%;
+        position: absolute;
+        bottom: 0%;
+        width: 60%;
         height: 100%;
+        left: -50px;
     }
 }
 

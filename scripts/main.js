@@ -77,6 +77,10 @@ function next(x){
         document.getElementById("confirmation-page").style.display="none"
         document.getElementById("results-page").style.display="block"
     }
+    else if (x == 5){
+        document.getElementById("results-page").style.display = "none"
+        document.getElementById("sample-diet-page").style.display="block"
+    }
     
 }
 
@@ -159,6 +163,7 @@ function calculateCalories(){
         calIntake = maintainance * 1.2
     }
     calIntake = Math.round(calIntake)
+    document.getElementById("cal-intake").innerText = calIntake.toString()
 }
 
 var protienQuantity
@@ -175,50 +180,37 @@ function calculateMacros(){
         protienQuantity = weight * 2.2
     }
     protienQuantity = Math.round(protienQuantity)
-    
+    document.getElementById("p-intake").innerText = protienQuantity.toString()
+
     fatQuantity = calIntake / 36
     fatQuantity = Math.round(fatQuantity)
+    document.getElementById("f-intake").innerText = fatQuantity.toString()
     
 
     carbQuantity = (calIntake - (4 * protienQuantity) - (9 * fatQuantity)) / 4
     carbQuantity = Math.round(carbQuantity)
-    console.log("Ampunt of Carbs: " + carbQuantity + " grams")
+    document.getElementById("c-intake").innerText = carbQuantity.toString()
 
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawGraph);
 }
 
 function drawGraph(){
-/*
-    var data = [
-        {x: "Protein", value: protienQuantity},
-        {x: "Fat", value: fatQuantity},
-        {x: "Carbohydrates", value: carbQuantity}
-    ]
-
-    var chart = anychart.pie()
-    chart.title("Quantity of each Macronutrient in grams")
-    chart.data(data);
-    chart.legend().position("right");
-    chart.legend().itemsLayout("vertical");
-    chart.pieSliceText
-    chart.container('pie-chart');
-    chart.draw();*/
-    
     var data = google.visualization.arrayToDataTable([
         ['Macronutrients', 'Quantitied (in grams)'],
         ['Protein',  protienQuantity],
         ['Fat',  fatQuantity],
-        ['Carbohydrates', carbQuantity]
-      ]);
-      var options = {
-        
+        ['Carbs', carbQuantity]
+    ]);
+    var options = {
         pieSliceText: 'label',
-        
-        title: 'Macronutrient Quantities in Grams',
-      };
+        backgroundColor: 'transparent',
+        pieSliceBorderColor: 'transparent',
+        legend: 'none',
+        /*title: 'Macronutrients Spread in grams'*/
 
-        var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
-        chart.draw(data, options);
+    };
+    var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+    chart.draw(data, options);
 }
 

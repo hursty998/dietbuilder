@@ -8,8 +8,6 @@
     <link href="styles/main.css" rel="stylesheet" />
     <script src="scripts/main.js"></script>
     <script src="https://kit.fontawesome.com/08ca90ab4f.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
-    <script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <title>Diet Builder</title>
 </head>
@@ -86,7 +84,21 @@
           <button class="back" onclick="next(2)">Back</button>
         </div>
         <div id="results-page" class="white-box">
+          <h1>Results</h1>
+          <div id="results-desk">
+            <div id="calories">Recomended Calorie Intake: <strong id="cal-intake"></strong> kcal</div>
+            <div id="protein">Recomended Protein Intake: <strong id="p-intake"></strong> grams</div>
+            <div id="fat">Recomended Fat Intake: <strong id="f-intake"></strong> grams</div>
+            <div id="carbs">Recomended Carb Intake: <strong id="c-intake"></strong> grams</div>
+          </div>
+          <div id="results-mob">
+
+          </div>
           <div id="pie-chart"></div>
+          <button class="next" onclick="next(5)">Next</button>
+        </div>
+        <div id="sample-diet-page">
+
         </div>
       </div>
     </main>
