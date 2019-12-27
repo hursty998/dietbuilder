@@ -184,13 +184,14 @@ function calculateMacros(){
     carbQuantity = Math.round(carbQuantity)
     console.log("Ampunt of Carbs: " + carbQuantity + " grams")
 
-    drawGraph()
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawGraph);
 }
 
 function drawGraph(){
-
+/*
     var data = [
-        {x: "Protein", value: protienQuantity, stroke: null},
+        {x: "Protein", value: protienQuantity},
         {x: "Fat", value: fatQuantity},
         {x: "Carbohydrates", value: carbQuantity}
     ]
@@ -199,9 +200,25 @@ function drawGraph(){
     chart.title("Quantity of each Macronutrient in grams")
     chart.data(data);
     chart.legend().position("right");
-chart.legend().itemsLayout("vertical");
+    chart.legend().itemsLayout("vertical");
+    chart.pieSliceText
     chart.container('pie-chart');
-    chart.draw();
+    chart.draw();*/
     
+    var data = google.visualization.arrayToDataTable([
+        ['Macronutrients', 'Quantitied (in grams)'],
+        ['Protein',  protienQuantity],
+        ['Fat',  fatQuantity],
+        ['Carbohydrates', carbQuantity]
+      ]);
+      var options = {
+        
+        pieSliceText: 'label',
+        
+        title: 'Macronutrient Quantities in Grams',
+      };
+
+        var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+        chart.draw(data, options);
 }
 
