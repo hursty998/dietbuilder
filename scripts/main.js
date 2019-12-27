@@ -183,9 +183,25 @@ function calculateMacros(){
     carbQuantity = (calIntake - (4 * protienQuantity) - (9 * fatQuantity)) / 4
     carbQuantity = Math.round(carbQuantity)
     console.log("Ampunt of Carbs: " + carbQuantity + " grams")
+
+    drawGraph()
 }
 
 function drawGraph(){
-    var data
+
+    var data = [
+        {x: "Protein", value: protienQuantity, stroke: null},
+        {x: "Fat", value: fatQuantity},
+        {x: "Carbohydrates", value: carbQuantity}
+    ]
+
+    var chart = anychart.pie()
+    chart.title("Quantity of each Macronutrient in grams")
+    chart.data(data);
+    chart.legend().position("right");
+chart.legend().itemsLayout("vertical");
+    chart.container('pie-chart');
+    chart.draw();
+    
 }
 
