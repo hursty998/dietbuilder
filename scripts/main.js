@@ -1,7 +1,7 @@
 var sex="Male"
 var age=0
 var height=0
-var weigth=0
+var weight=0
 var activity="Low"
 var aim="Lose Weight"
 var diet="Vegan"
@@ -126,3 +126,40 @@ function changeDiet(diet1){
     diet=diet1
     document.getElementById("diet1").innerText=diet
 }
+
+var BMR
+var maintainance
+var calIntake =0
+function calculateCalories(){
+    console.log("Sex: " + sex, "Age: " + age, "Height: "+ height, "Weight: " + weight)
+    console.log("Activity Level: " + activity, "Aim: " + aim)
+    if (sex == "Male"){
+    BMR = (13.75 * weight) + (5 * height) - (6.76 * age) + 66
+    }
+    else{
+       BMR = (9.56 * weight) + (1.85 * height) - (4.68 * age) + 655
+    }
+    if (activity == "Low"){
+        maintainance = BMR * 1.2
+    }
+    else if (activity == "Medium"){
+        maintainance = BMR * 1.55
+    }
+    else{
+        maintainance = BMR * 1.725
+    }
+
+    if (aim == "Lose Weight"){
+        calIntake = maintainance * 0.8
+    }
+    else if (aim == "Maintain"){
+        calIntake = maintainance
+    }
+    else{
+        calIntake = maintainance * 1.2
+    }
+    calIntake = Math.round(calIntake)
+    console.log("Calorie Intake: " + calIntake)
+}
+
+
