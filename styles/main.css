@@ -238,10 +238,18 @@ header {
     #results-page{
         height: 70%;
     }
+    #results-desk{
+        display: none;
+    }
     #results-mob{
         padding-left: 10px;
         padding-right: 10px;
-        font-size: 130%;
+        font-size: 110%;
+    }
+    #pie-chart{
+        width: 100%;
+        height: 70%;
+        padding-bottom: 100px;
     }
 
 }
@@ -476,6 +484,9 @@ header {
     }
     .up3{
         margin-top: -48px;
+    }
+    #results-mob{
+        display: none;
     }
     
     #results-desk{

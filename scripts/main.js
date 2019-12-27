@@ -164,6 +164,7 @@ function calculateCalories(){
     }
     calIntake = Math.round(calIntake)
     document.getElementById("cal-intake").innerText = calIntake.toString()
+    document.getElementById("cal1-intake").innerText = calIntake.toString()
 }
 
 var protienQuantity
@@ -181,15 +182,18 @@ function calculateMacros(){
     }
     protienQuantity = Math.round(protienQuantity)
     document.getElementById("p-intake").innerText = protienQuantity.toString()
+    document.getElementById("p1-intake").innerText = protienQuantity.toString()
 
     fatQuantity = calIntake / 36
     fatQuantity = Math.round(fatQuantity)
     document.getElementById("f-intake").innerText = fatQuantity.toString()
+    document.getElementById("f1-intake").innerText = fatQuantity.toString()
     
 
     carbQuantity = (calIntake - (4 * protienQuantity) - (9 * fatQuantity)) / 4
     carbQuantity = Math.round(carbQuantity)
     document.getElementById("c-intake").innerText = carbQuantity.toString()
+    document.getElementById("c1-intake").innerText = carbQuantity.toString()
 
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawGraph);
