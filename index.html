@@ -8,6 +8,8 @@
     <link href="styles/main.css" rel="stylesheet" />
     <script src="scripts/main.js"></script>
     <script src="https://kit.fontawesome.com/08ca90ab4f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
     <title>Diet Builder</title>
 </head>
 <body>
@@ -79,10 +81,12 @@
             <div class="left-col up1">Aim:</div><div class="right1-col up1" id="aim1"></div><br><br>
             <div class="left-col up2">Diet:</div><div class="right1-col up2" id="diet1"></div><br><br>
           </div>
-          <button class="next" onclick="next(4); calculateCalories()">Confirm</button>
+          <button class="next" onclick="next(4); calculateCalories(); calculateMacros()">Confirm</button>
           <button class="back" onclick="next(2)">Back</button>
         </div>
-        <div id="results1-page" class="white-box"></div>
+        <div id="results-page" class="white-box">
+          <div id="pie-chart"></div>
+        </div>
       </div>
     </main>
 </body>

@@ -75,7 +75,7 @@ function next(x){
     }
     else if (x==4){
         document.getElementById("confirmation-page").style.display="none"
-        document.getElementById("results1-page").style.display="block"
+        document.getElementById("results-page").style.display="block"
     }
     
 }
@@ -159,7 +159,33 @@ function calculateCalories(){
         calIntake = maintainance * 1.2
     }
     calIntake = Math.round(calIntake)
-    console.log("Calorie Intake: " + calIntake)
 }
 
+var protienQuantity
+var fatQuantity
+var carbQuantity
+function calculateMacros(){
+    if (aim == "Lose Weight"){
+        protienQuantity = weight * 2.2
+    }
+    else if (aim == "Maintain"){
+        protienQuantity = weight * 1.54
+    }
+    else{
+        protienQuantity = weight * 2.2
+    }
+    protienQuantity = Math.round(protienQuantity)
+    
+    fatQuantity = calIntake / 36
+    fatQuantity = Math.round(fatQuantity)
+    
+
+    carbQuantity = (calIntake - (4 * protienQuantity) - (9 * fatQuantity)) / 4
+    carbQuantity = Math.round(carbQuantity)
+    console.log("Ampunt of Carbs: " + carbQuantity + " grams")
+}
+
+function drawGraph(){
+    var data
+}
 

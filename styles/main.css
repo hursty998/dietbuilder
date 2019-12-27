@@ -469,8 +469,12 @@ header {
     .up3{
         margin-top: -48px;
     }
+    #pie-chart{
+        width: 200px;
+        height: 200px;
+    }
 }
 
-#details1-page, #details2-page, #details3-page, #confirmation-page, #results1-page{
+#details1-page, #details2-page, #details3-page, #confirmation-page, #results-page{
     display: none;
 }
