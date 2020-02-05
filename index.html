@@ -16,95 +16,95 @@
 		<img src="styles/assets/logo.png"></img>
     </header>
     <main>
-      <div class="container">
-        <div id="welcome-page" class="white-box">
-          <h1>Welcome To the Diet Builder</h1>
-          <p>Calculate your calories and generate a sample diet plan now</p>
-          <button id="begin-btn" onclick="next(0)">Begin</button>
-        </div>
-        <div id="details1-page" class="white-box">
-          <h1>Please Enter the Following Details</h1>
-          <button class="radio1" id="opt-male" onclick="radio('opt-male','opt-female',0,0); changeGender('Male')" ><i class="fas fa-mars"></i><br> Male</button>
-          <button id="sex"><strong style="font-size: 90%;">Sex</strong> </button>
-          <button class="radio2" id="opt-female" onclick="radio('opt-female','opt-male',0,0); changeGender('Female')"><i class="fas fa-venus"></i><br> Female</button>
-          <div class="inline-textbox" id="age-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeAge()" type="number" min="14" max="60" step="1" placeholder="##" name="age" id="age"><div class="keep-right">Years old</div></div></div>
-          <button class="next" onclick="next(1)">Next</button>
-        </div>
-        <div id="details2-page" class="white-box">
-          <h1>Please Enter the Following Details</h1>
-          <div class="inline-textbox" id="height-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeHeight()" type="number" min="130" max="250" step="1" placeholder="##" name="height" id="height"><div class="keep-right">cm</div></div></div>
-          <div class="inline-textbox" id="weight-textbox"> <div><strong>and</strong> </div><div class="border"><input onchange="changeWeight()" type="number" min="40" max="140" step="1" placeholder="##" name="weight" id="weight"><div class="keep-right">kg</div></div></div>
-          <div id="activity-dropdown"><strong>Activity Level</strong></div>
-          <div id="border1">
-            <i class="fas fa-chevron-down" style="position: absolute; left:85%; bottom: 40%;"></i>
-            <select name="activity level" id="activity-level" onchange="changeActivity()">
-              <option value="Low">Low</option>
-              <option value="Medium">Moderately</option>
-              <option value="High">High</option>
-            </select>
-          </div>
-          
-          <button class="next" onclick="next(2)">Next</button>
-          <button class="back" onclick="next(0)">Back</button>
-        </div>
-        <div id="details3-page" class="white-box">
-            <h1>Please Enter the Following Details</h1>
-            <strong id="aim-text">Aim:</strong>
-            <div id="radio-aim">
-              <button class="radio1" id="opt-lose" onclick="radio('opt-lose','opt-maintain','opt-build',0); changeAim('Lose Weight')" ><i class="fas fa-bread-slice"></i><br> Lose Weight</button>
-              <button class="radio2" id="opt-maintain" onclick="radio('opt-maintain','opt-lose','opt-build',0); changeAim('Maintain')" ><i class="far fa-thumbs-up"></i><br> Maintain Weight</button>
-              <button class="radio2" id="opt-build" onclick="radio('opt-build','opt-maintain','opt-lose',0); changeAim('Build Muscle')" ><i class="fas fa-expand-arrows-alt"></i><br> Build Muscle</button>
+        <div class="container">
+            <div id="welcome-page" class="white-box">
+                <h1>Welcome To the Diet Builder</h1>
+                <p>Calculate your calories and generate a sample diet plan now</p>
+                <button id="begin-btn" onclick="next(0)">Begin</button>
             </div>
-            <strong id="diet-text">Diet:</strong>
-            <div id="radio-diet">
-                <button class="radio1" id="opt-vegan" onclick="radio('opt-vegan','opt-vegitarian','opt-gluten','opt-none'); changeDiet('Vegan')" ><i class="fas fa-seedling"></i><br> Vegan</button>
-                <button class="radio2" id="opt-vegitarian" onclick="radio('opt-vegitarian','opt-vegan','opt-gluten','opt-none'); changeDiet('Vegitarian')" ><i class="fas fa-carrot"></i><br> Vegetarian</button>
-                <button class="radio2" style="font-size: 120%;" id="opt-gluten" onclick="radio('opt-gluten','opt-vegan','opt-vegitarian','opt-none'); changeDiet('Gluten Free')" ><i class="fas fa-bread-slice"></i><br> Gluten Free</button>
-                <button class="radio2" id="opt-none" onclick="radio('opt-none','opt-vegan','opt-vegitarian','opt-gluten'); changeDiet('None')" ><i class="far fa-sticky-note"></i><br> None</button>
+            <div id="details1-page" class="white-box">
+                <h1>Please Enter the Following Details</h1>
+                <button class="radio1" id="opt-male" onclick="radio('opt-male','opt-female',0,0); changeGender('Male')"><i class="fas fa-mars"></i><br> Male</button>
+                <button id="sex"><strong style="font-size: 90%;">Sex</strong> </button>
+                <button class="radio2" id="opt-female" onclick="radio('opt-female','opt-male',0,0); changeGender('Female')"><i class="fas fa-venus"></i><br> Female</button>
+                <div class="inline-textbox" id="age-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeAge()" type="number" min="14" max="60" step="1" placeholder="##" name="age" id="age"><div class="keep-right">Years old</div></div></div>
+                <button class="next" onclick="next(1)">Next</button>
             </div>
-            <button class="next" onclick="next(3)">Next</button>
-            <button class="back" onclick="next(1)">Back</button>
+            <div id="details2-page" class="white-box">
+                <h1>Please Enter the Following Details</h1>
+                <div class="inline-textbox" id="height-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeHeight()" type="number" min="130" max="250" step="1" placeholder="##" name="height" id="height"><div class="keep-right">cm</div></div></div>
+                <div class="inline-textbox" id="weight-textbox"> <div><strong>and</strong> </div><div class="border"><input onchange="changeWeight()" type="number" min="40" max="140" step="1" placeholder="##" name="weight" id="weight"><div class="keep-right">kg</div></div></div>
+                <div id="activity-dropdown"><strong>Activity Level</strong></div>
+                <div id="border1">
+                    <i class="fas fa-chevron-down" style="position: absolute; left:85%; bottom: 40%;"></i>
+                    <select name="activity level" id="activity-level" onchange="changeActivity()">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Moderately</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
 
-        </div>
-        <div id="confirmation-page" class="white-box">
-          <h1>Please Check Your Information</h1>
-          <p style="color: grey; margin-bottom: 10px;">You cannot go back after confirmation</p>
-         <div id="col-1">
-            <div class="left-col">Sex:</div><div class="right1-col" id="sex1"></div><br><br>
-            <div class="left-col up1">Age:</div><div class="right1-col up1" id="age1"></div><br><br>
-            <div class="left-col up2">Height:</div><div class="right1-col up2" id="height1"></div><br><br>
-            <div class="left-col up3">Weight:</div><div class="right1-col up3" id="weight1"></div><br><br>
-         </div>
-          <div id="col-2">
-            <div class="left-col">Activeness:</div><div class="right1-col" id="activity1"></div><br><br>
-            <div class="left-col up1">Aim:</div><div class="right1-col up1" id="aim1"></div><br><br>
-            <div class="left-col up2">Diet:</div><div class="right1-col up2" id="diet1"></div><br><br>
-          </div>
-          <button class="next" onclick="next(4); calculateCalories(); calculateMacros()">Confirm</button>
-          <button class="back" onclick="next(2)">Back</button>
-        </div>
-        <div id="results-page" class="white-box">
-          <h1>Results</h1>
-          <div id="results-desk">
-            <div id="calories">Recomended Calorie Intake: <strong id="cal-intake"></strong> kcal</div>
-            <div id="protein">Recomended Protein Intake: <strong id="p-intake"></strong> grams</div>
-            <div id="fat">Recomended Fat Intake: <strong id="f-intake"></strong> grams</div>
-            <div id="carbs">Recomended Carb Intake: <strong id="c-intake"></strong> grams</div>
-          </div>
-          <div id="results-mob">
-            <div id="calories">Recomended Calorie Intake: <strong id="cal1-intake"></strong> kcal</div><br>
-            Recomended Macros: <br>
-            Protein: <strong id="p1-intake"></strong> grams,
-            Fat: <strong id="f1-intake"></strong> grams,
-            Carbs: <strong id="c1-intake"></strong> grams
-          </div>
-          <div id="pie-chart"></div>
-          <button class="next" onclick="next(5)">Next</button>
-        </div>
-        <div id="sample-diet-page">
+                <button class="next" onclick="next(2)">Next</button>
+                <button class="back" onclick="next(0)">Back</button>
+            </div>
+            <div id="details3-page" class="white-box">
+                <h1>Please Enter the Following Details</h1>
+                <strong id="aim-text">Aim:</strong>
+                <div id="radio-aim">
+                    <button class="radio1" id="opt-lose" onclick="radio('opt-lose','opt-maintain','opt-build',0); changeAim('Lose Weight')"><i class="fas fa-bread-slice"></i><br> Lose Weight</button>
+                    <button class="radio2" id="opt-maintain" onclick="radio('opt-maintain','opt-lose','opt-build',0); changeAim('Maintain')"><i class="far fa-thumbs-up"></i><br> Maintain Weight</button>
+                    <button class="radio2" id="opt-build" onclick="radio('opt-build','opt-maintain','opt-lose',0); changeAim('Build Muscle')"><i class="fas fa-expand-arrows-alt"></i><br> Build Muscle</button>
+                </div>
+                <strong id="diet-text">Diet:</strong>
+                <div id="radio-diet">
+                    <button class="radio1" id="opt-vegan" onclick="radio('opt-vegan','opt-vegitarian','opt-gluten','opt-none'); changeDiet('Vegan')"><i class="fas fa-seedling"></i><br> Vegan</button>
+                    <button class="radio2" id="opt-vegitarian" onclick="radio('opt-vegitarian','opt-vegan','opt-gluten','opt-none'); changeDiet('Vegitarian')"><i class="fas fa-carrot"></i><br> Vegetarian</button>
+                    <button class="radio2" style="font-size: 120%;" id="opt-gluten" onclick="radio('opt-gluten','opt-vegan','opt-vegitarian','opt-none'); changeDiet('Gluten Free')"><i class="fas fa-bread-slice"></i><br> Gluten Free</button>
+                    <button class="radio2" id="opt-none" onclick="radio('opt-none','opt-vegan','opt-vegitarian','opt-gluten'); changeDiet('None')"><i class="far fa-sticky-note"></i><br> None</button>
+                </div>
+                <button class="next" onclick="next(3)">Next</button>
+                <button class="back" onclick="next(1)">Back</button>
 
+            </div>
+            <div id="confirmation-page" class="white-box">
+                <h1>Please Check Your Information</h1>
+                <p style="color: grey; margin-bottom: 10px;">You cannot go back after confirmation</p>
+                <div id="col-1">
+                    <div class="left-col">Sex:</div><div class="right1-col" id="sex1"></div><br><br>
+                    <div class="left-col up1">Age:</div><div class="right1-col up1" id="age1"></div><br><br>
+                    <div class="left-col up2">Height:</div><div class="right1-col up2" id="height1"></div><br><br>
+                    <div class="left-col up3">Weight:</div><div class="right1-col up3" id="weight1"></div><br><br>
+                </div>
+                <div id="col-2">
+                    <div class="left-col">Activeness:</div><div class="right1-col" id="activity1"></div><br><br>
+                    <div class="left-col up1">Aim:</div><div class="right1-col up1" id="aim1"></div><br><br>
+                    <div class="left-col up2">Diet:</div><div class="right1-col up2" id="diet1"></div><br><br>
+                </div>
+                <button class="next" onclick="next(4);">Confirm</button>
+                <button class="back" onclick="next(2)">Back</button>
+            </div>
+            <div id="results-page" class="white-box">
+                <h1>Results</h1>
+                <div id="results-desk">
+                    <div id="calories">Recomended Calorie Intake: <strong id="cal-intake"></strong> kcal</div>
+                    <div id="protein">Recomended Protein Intake: <strong id="p-intake"></strong> grams</div>
+                    <div id="fat">Recomended Fat Intake: <strong id="f-intake"></strong> grams</div>
+                    <div id="carbs">Recomended Carb Intake: <strong id="c-intake"></strong> grams</div>
+                </div>
+                <div id="results-mob">
+                    <div id="calories">Recomended Calorie Intake: <strong id="cal1-intake"></strong> kcal</div><br>
+                    Recomended Macros: <br>
+                    Protein: <strong id="p1-intake"></strong> grams,
+                    Fat: <strong id="f1-intake"></strong> grams,
+                    Carbs: <strong id="c1-intake"></strong> grams
+                </div>
+                <div id="pie-chart"></div>
+                <button class="next" onclick="next(5)">Next</button>
+            </div>
+            <div id="sample-diet-page">
+
+            </div>
         </div>
-      </div>
     </main>
 </body>
 </html>

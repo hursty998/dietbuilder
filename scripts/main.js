@@ -1,11 +1,17 @@
-var sex="Male"
-var age=0
-var height=0
-var weight=0
-var activity="Low"
-var aim="Lose Weight"
-var diet="Vegan"
+var sex = "Male"
+var age = 0
+var height = 0
+var weight = 0
+var activity = "Low"
+var aim = "Lose Weight"
+var diet = "Vegan"
 
+window.onload = function () {
+    changeAge()
+    changeHeight()
+    changeWeight()
+    changeActivity()
+};
 /*function begin(){
     document.getElementById("welcome-page").style.display="none"
     document.getElementById("details1-page").style.display="block"
@@ -73,9 +79,12 @@ function next(x){
         document.getElementById("details3-page").style.display="none"
         document.getElementById("confirmation-page").style.display="block"
     }
-    else if (x==4){
+    else if (x == 4) {
+        calculateCalories()
+        calculateMacros()
         document.getElementById("confirmation-page").style.display="none"
-        document.getElementById("results-page").style.display="block"
+        document.getElementById("results-page").style.display = "block"
+        createMeals()
     }
     else if (x == 5){
         document.getElementById("results-page").style.display = "none"
@@ -211,10 +220,140 @@ function drawGraph(){
         backgroundColor: 'transparent',
         pieSliceBorderColor: 'transparent',
         legend: 'none',
-        /*title: 'Macronutrients Spread in grams'*/
 
     };
-    var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+    var chart = new google.visualization.PieChart(document.getElementById('pie-chart')); //pie-chart is the ID of the DIV i want the pie chart to be placed
     chart.draw(data, options);
 }
 
+var breakfast = []
+var lunch = []
+var dinner = []
+function createMeals() {
+    //breakfast: 25% lunch: 37.5% dinner:37.5%
+    
+    //defining how many calories and nutrients the meals should have
+    //[number of calories in meal, quantity of protein in meal, quantity of fats in meal, quantity of carbs in meal]
+    breakfastNutrients = [calIntake * 0.25, protienQuantity * 0.25, fatQuantity * 0.25, carbQuantity * 0.25]
+    lunchNutrients = [calIntake * 0.375, protienQuantity * 0.375, fatQuantity * 0.375, carbQuantity * 0.375]
+    dinnerNutrients = [calIntake * 0.375, protienQuantity * 0.375, fatQuantity * 0.375, carbQuantity * 0.375]
+
+    //defining each breakfast food, its dietary requirements and calories and nutrients per 100g
+    //breakfast variable = [name, vegan?, vegitarian?, gluten free?, calories/100g, protien/100g, fats/100g, carbs/100g]
+    var yogurtGranola = ["Granola with Yogurt", false, true, false,136, 7.7, 3.1, 20.3]
+    var porridge = ["Porridge", true, true, true, 96, 5, 2.6, 13.5]
+    var baconEggs = ["Bacon and fried Eggs", false, false, true, 305, 22.3, 23, 1.2]
+    var eggsToast = ["Boiled Eggs on Toast", false, true, false, 181, 11.4, 8.8, 12.8]
+    var proteinShake = ["Protein Shake", true, true, true, 68, 7.6, 3.4, 1]
+    var banana = ["Banana", true, true, true, 84, 1, 0.3, 21.6]
+
+    //defining which foods are in each meal. I have put 3 options in each meal and two or 3 foods in each option
+    //[[Options 1], [options 2], [options 3]]
+    var breakfastFoods = [[yogurtGranola, porridge], [baconEggs, eggsToast, proteinShake], [banana]]
+    
+    //defining an array to put the foods the user can eat in
+    //[choice between options 1, choice between options 2, choice between options 3]
+    var yourBreakfast = []
+    
+    //from here
+    var numFoodsInMeal, fractionFood1, fractionFood2, fractionFood3;
+    if (breakfastNutrients[0] >= 700) {
+        numFoodsInMeal=3
+        fractionFood1 = 0.5
+        fractionFood2= 0.4
+        fractionFood3 = 0.1
+    }
+    else if (breakfastNutrients[0] >= 300 && breakfastNutrients[0] < 700){
+        numFoodsInMeal=2
+        fractionFood1 = 0.65
+        fractionFood2 = 0.35
+    }
+    else{
+        numFoodsInMeal=1
+        fractionFood1 = 1
+    }
+    var numFoods =0;
+    var yourFinalBreakfast = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
+    // this for loop goes through each of the options in the breakfast foods array
+    for (var i = 0; i < numFoodsInMeal; i++) {
+        //this goes through the foods in the option that its currently looking at
+        for (var x = 0; x < breakfastFoods[i].length; x++) {
+            //if the choice between options [i] in the yourBreakfast array is already takes, then go to the next option
+            if (numFoods == i + 1) {
+                continue;
+            }
+            //if the user is vegan and the breakfast food is vegan
+            if ((diet == "Vegan" && breakfastFoods[i][x][1] == true) || (diet == "Vegitarian" && breakfastFoods[i][x][2] == true) || (diet == "Gluten Free" && breakfastFoods[i][x][3] == true) || (diet == "None")) {
+                //set the choice between options [i] in yourBreakfast array to this food
+                console.log("i="+i, ", x="+x)
+                numFoods+=1
+                yourFinalBreakfast[i][0] = breakfastFoods[i][x][0]
+                yourFinalBreakfast[i][1] = Math.round(((breakfastNutrients[0] * eval("fractionFood"+(i+1))) / breakfastFoods[i][x][4]) * 100)
+                for(var t =0; t<4; t++){
+                    yourFinalBreakfast[i][t+2] = Math.round((yourFinalBreakfast[i][1]/100)*breakfastFoods[i][x][t+4])
+                } 
+            }
+        }
+    }
+    console.log(breakfastNutrients[0], yourFinalBreakfast[0], yourFinalBreakfast[1], yourFinalBreakfast[2])
+    
+    //to here
+    /*
+    // this for loop goes through each of the options in the breakfast foods array
+    for (var i = 0; i < breakfastFoods.length; i++) {
+        //this goes through the foods in the option that its currently looking at
+        for (var x = 0; x < breakfastFoods[i].length; x++) {
+            //if the choice between options [i] in the yourBreakfast array is already takes, then go to the next option
+            if (yourBreakfast.length == i + 1) {
+                continue;
+            }
+            //if the user is vegan and the breakfast food is vegan
+            if (diet == "Vegan" && breakfastFoods[i][x][1] == true) {
+                //set the choice between options [i] in yourBreakfast array to this food
+                yourBreakfast[i] = breakfastFoods[i][x]
+            }
+            else if (diet == "Vegitarian" && breakfastFoods[i][x][2] == true) {
+                yourBreakfast[i] = breakfastFoods[i][x]
+            }
+            else if (diet == "Gluten Free" && breakfastFoods[i][x][3] == true) {
+                yourBreakfast[i] = breakfastFoods[i][x]
+            }
+            else if (diet == "None") {
+                yourBreakfast[i] = breakfastFoods[i][x]
+            }
+        }
+    }
+    console.log(yourBreakfast[0][0], yourBreakfast[1][0], yourBreakfast[2][0])
+
+    var yourFinalBreakfast = [[0,0],[0,0],[0,0]] //[[name, quantity],[name, quantity], [name,quantity]]
+    var z;
+    if (breakfastNutrients[0] >= 700) {
+        z = 3
+        yourFinalBreakfast[0][0] = yourBreakfast[0][0]
+        yourFinalBreakfast[0][1] =Math.round(((breakfastNutrients[0] * 0.5) / yourBreakfast[0][4]) * 100)
+        yourFinalBreakfast[1][0] = yourBreakfast[0][0]
+        yourFinalBreakfast[1][1] = Math.round(((breakfastNutrients[0] * 0.4) / yourBreakfast[1][4]) * 100)
+        yourFinalBreakfast[2][0] = yourBreakfast[0][0]
+        yourFinalBreakfast[2][1] = Math.round(((breakfastNutrients[0] * 0.1) / yourBreakfast[2][4]) * 100)
+    }
+    else if (breakfastNutrients[0] >= 300 && breakfastNutrients[0] < 700) {
+        z=2
+        yourFinalBreakfast[0][0] = yourBreakfast[0][0]
+        yourFinalBreakfast[0][1] = Math.round(((breakfastNutrients[0] * 0.65) / yourBreakfast[0][4]) * 100)
+        yourFinalBreakfast[1][0] = yourBreakfast[1][0]
+        yourFinalBreakfast[1][1] = Math.round(((breakfastNutrients[0] * 0.35) / yourBreakfast[1][4]) * 100)
+    }
+    else {
+        z=1
+        yourFinalBreakfast[0][0] = yourBreakfast[0][0]
+        yourFinalBreakfast[0][1] = Math.round((breakfastNutrients[0]/yourBreakfast[0][4])*100)
+    }
+    
+
+    for (var i =0; i<z; i++){
+        for(var t =0; t<4; t++){
+            yourFinalBreakfast[i][t+2]=Math.round((yourFinalBreakfast[i][1]/100)*yourBreakfast[i][t+4])
+        }  
+    }
+    console.log(breakfastNutrients[0], yourFinalBreakfast[0], yourFinalBreakfast[1], yourFinalBreakfast[2])*/
+}
