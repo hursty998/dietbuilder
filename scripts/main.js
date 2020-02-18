@@ -12,10 +12,7 @@ window.onload = function () {
     changeWeight()
     changeActivity()
 };
-/*function begin(){
-    document.getElementById("welcome-page").style.display="none"
-    document.getElementById("details1-page").style.display="block"
-}*/
+
 
 function radio(in1, in2, in3, in4){ //taking the 4 IDs of the elements involved
     var z=2 //this will be the number going into the for loop
@@ -83,6 +80,7 @@ function next(x){
         calculateCalories()
         calculateMacros()
         document.getElementById("confirmation-page").style.display="none"
+        document.getElementById("details1-page").style.display="none"
         document.getElementById("results-page").style.display = "block"
         createMeals()
     }
@@ -145,7 +143,7 @@ var maintainance
 var calIntake =0
 function calculateCalories(){
     console.log("Sex: " + sex, "Age: " + age, "Height: "+ height, "Weight: " + weight)
-    console.log("Activity Level: " + activity, "Aim: " + aim)
+    console.log("Activity Level: " + activity, "Aim: " + aim, "Diet: "+diet)
     if (sex == "Male"){
     BMR = (13.75 * weight) + (5 * height) - (6.76 * age) + 66
     }
@@ -215,7 +213,7 @@ function drawGraph(){
         ['Fat',  fatQuantity],
         ['Carbs', carbQuantity]
     ]);
-    var options = {
+    var courses = {
         pieSliceText: 'label',
         backgroundColor: 'transparent',
         pieSliceBorderColor: 'transparent',
@@ -223,7 +221,7 @@ function drawGraph(){
 
     };
     var chart = new google.visualization.PieChart(document.getElementById('pie-chart')); //pie-chart is the ID of the DIV i want the pie chart to be placed
-    chart.draw(data, options);
+    chart.draw(data, courses);
 }
 
 function createMeals() {
@@ -265,130 +263,121 @@ function createMeals() {
 
 
 
-    //defining which foods are in each meal. I have put 3 options in each meal and up to 3 foods in each option
-    //[[Options 1], [options 2], [options 3]]
+    //defining which foods are in each meal. I have put 3 courses in each meal and up to 3 foods in each option
+    //[[course 1],  course 2],  course 3]]
     var breakfastFoods = [[yogurtGranola, porridge], [baconEggs, eggsToast, proteinShake], [banana]]
     var lunchFoods = [[pastaChicken, pastaTofu, riceChicken],[avacadosEggs,avacadosToast,avacadosGF],[yogurt, apple]]
     var dinnerFoods =[[spagetti, quornSpagetti, chilie],[chickenPizza, pepperPizza, veganPizza, GFpizza],[brownie, icecream]]
     
     //defining an array to put the foods the user can eat in
-    //[choice between options 1, choice between options 2, choice between options 3]
+    //[choice between options in course 1, choice between options in course 2, choice between options in course 3]
 
     
     //from here
-    var numFoodsInMeal, fractionFood1, fractionFood2, fractionFood3;
-    if (breakfastNutrients[0] >= 700) {
-        numFoodsInMeal=3
-        fractionFood1 = 0.5
-        fractionFood2= 0.4
-        fractionFood3 = 0.1
+    var numCoursesInMeal, fractionCourse1, fractionCourse2, fractionCourse3;
+    if (calIntake >= 2700) { //if calorie intake is greater than 2700
+        numCoursesInMeal=3 //number of courses in each meal = 3
+        fractionCourse1 = 0.5 //the fraction of the calories in each that should come from course 1
+        fractionCourse2= 0.4 //the fraction of the calories in each that should come from course 2
+        fractionCourse3 = 0.1 //the fraction of the calories in each that should come from course 3
     }
-    else if (breakfastNutrients[0] >= 300 && breakfastNutrients[0] < 700){
-        numFoodsInMeal=2
-        fractionFood1 = 0.65
-        fractionFood2 = 0.35
+    else if (calIntake >= 1700 && breakfastNutrients[0] < 2700){ //if calorie intake is greater than 1700 and less than 2700
+        numCoursesInMeal=2
+        fractionCourse1 = 0.65
+        fractionCourse2 = 0.35
     }
-    else{
-        numFoodsInMeal=1
-        fractionFood1 = 1
-    }
-    var numBFoods =0;
+    else{ //if calorie intake is less than 1700
+        numCoursesInMeal=1
+        fractionCourse1 = 1
+    }//output to console
+    console.log("Calorie Intake: "+ calIntake, "Number of Courses: "+numCoursesInMeal)
+
     var yourFinalBreakfast = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
-    // this for loop goes through each of the options in the breakfast foods array
-    for (var i = 0; i < numFoodsInMeal; i++) {
-        //this goes through the foods in the option that its currently looking at
+    // this for loop goes through each of the courses in the breakfast foods array
+    for (var i = 0; i < numCoursesInMeal; i++) {
+        //this goes through the foods in the course that its currently looking at
         for (var x = 0; x < breakfastFoods[i].length; x++) {
-            //if the choice between options [i] in the yourBreakfast array is already takes, then go to the next option
-            if (numBFoods == i + 1) {
-                continue;
-            }
+        
             //if the user is vegan and the breakfast food is vegan
             if ((diet == "Vegan" && breakfastFoods[i][x][1] == true) || (diet == "Vegitarian" && breakfastFoods[i][x][2] == true) || (diet == "Gluten Free" && breakfastFoods[i][x][3] == true) || (diet == "None")) {
-                //set the choice between options [i] in yourBreakfast array to this food
-                console.log("i="+i, ", x="+x)
-                numBFoods+=1
-                yourFinalBreakfast[i][0] = breakfastFoods[i][x][0]
-                yourFinalBreakfast[i][1] = Math.round(((breakfastNutrients[0] * eval("fractionFood"+(i+1))) / breakfastFoods[i][x][4]) * 100)
-                for(var t =0; t<4; t++){
+                //sets the first element of course i in personalised breakfast array to name of the food in question
+                yourFinalBreakfast[i][0] = breakfastFoods[i][x][0] 
+                yourFinalBreakfast[i][1] = Math.round(((breakfastNutrients[0] * eval("fractionCourse"+(i+1))) / breakfastFoods[i][x][4]) * 100) //calculates quantity in grams
+                for(var t =0; t<4; t++){ //loops up to t=3
+                    //set the t+1 position of the food being added in personalised breakfast array to the amount calories and nutrients in this quantity of food
                     yourFinalBreakfast[i][t+2] = Math.round((yourFinalBreakfast[i][1]/100)*breakfastFoods[i][x][t+4])
-                    if (t>0){
+                    if (t>0){ 
+                        //if we arent calculating calories (t=0) add the quantities of nutrients to the breakfastNutrients array in the [t] position
                         breakfastNutrients[t] += Math.round((yourFinalBreakfast[i][1]/100)*breakfastFoods[i][x][t+4])
                     }
                 }
+                break //goes to next i value as we dont need another food from this course to be added to the personalised meal array
             }
         }
     }
-    console.log(breakfastNutrients, yourFinalBreakfast[0], yourFinalBreakfast[1], yourFinalBreakfast[2])
+    //console.log(yourFinalBreakfast[0][0]+", "+ yourFinalBreakfast[0][1]+", "+ yourFinalBreakfast[0][2]+", "+ yourFinalBreakfast[0][3]+", "+ yourFinalBreakfast[0][4]+", "+yourFinalBreakfast[0][5])
 
-    var numLFoods =0;
     var yourFinalLunch = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
-    // this for loop goes through each of the options in the breakfast foods array
-    for (var i = 0; i < numFoodsInMeal; i++) {
+    // this for loop goes through each of the courses in the breakfast foods array
+    for (var i = 0; i < numCoursesInMeal; i++) {
         //this goes through the foods in the option that its currently looking at
         for (var x = 0; x < lunchFoods[i].length; x++) {
-            //if the choice between options [i] in the yourBreakfast array is already takes, then go to the next option
-            if (numLFoods == i + 1) {
-                continue;
-            }
             //if the user is vegan and the breakfast food is vegan
             if ((diet == "Vegan" && lunchFoods[i][x][1] == true) || (diet == "Vegitarian" && lunchFoods[i][x][2] == true) || (diet == "Gluten Free" && lunchFoods[i][x][3] == true) || (diet == "None")) {
-                //set the choice between options [i] in yourBreakfast array to this food
-                console.log("i="+i, ", x="+x)
-                numLFoods+=1
+                //sets the first element of course i in personalised lunch array to name of the food in question
                 yourFinalLunch[i][0] = lunchFoods[i][x][0]
-                yourFinalLunch[i][1] = Math.round(((lunchNutrients[0] * eval("fractionFood"+(i+1))) / lunchFoods[i][x][4]) * 100)
-                for(var t =0; t<4; t++){
+                yourFinalLunch[i][1] = Math.round(((lunchNutrients[0] * eval("fractionCourse"+(i+1))) / lunchFoods[i][x][4]) * 100) //calculates quantity in grams
+                for(var t =0; t<4; t++){ //loops up to t=3
+                    //set the t+1 position of the food being added in personalised lunch array to the amount calories and nutrients in this quantity of food
                     yourFinalLunch[i][t+2] = Math.round((yourFinalLunch[i][1]/100)*lunchFoods[i][x][t+4])
                     if (t>0){
+                        //if we arent calculating calories (t=0) add the quantities of nutrients to the lunch Nutrients array in the [t] position
                         lunchNutrients[t] += Math.round((yourFinalLunch[i][1]/100)*lunchFoods[i][x][t+4])
                     }  
-                }    
+                } 
+                break //goes to next i value as we dont need another food from this course to be added to the personalised meal array   
             }
         }
     }
-    console.log(lunchNutrients, yourFinalLunch[0], yourFinalLunch[1], yourFinalLunch[2])
+    //console.log(yourFinalLunch[0][0]+", "+ yourFinalLunch[0][1]+", "+ yourFinalLunch[1][0]+", \n "+ yourFinalLunch[1][1]+", "+ yourFinalLunch[2][0]+", "+yourFinalLunch[2][1])
 
-    var numDFoods =0;
     var yourFinalDinner = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
-    // this for loop goes through each of the options in the breakfast foods array
-    for (var i = 0; i < numFoodsInMeal; i++) {
+    // this for loop goes through each of the courses in the breakfast foods array
+    for (var i = 0; i < numCoursesInMeal; i++) {
         //this goes through the foods in the option that its currently looking at
         for (var x = 0; x < dinnerFoods[i].length; x++) {
-            //if the choice between options [i] in the yourBreakfast array is already takes, then go to the next option
-            if (numDFoods == i + 1) {
-                continue;
-            }
             //if the user is vegan and the breakfast food is vegan
             if ((diet == "Vegan" && dinnerFoods[i][x][1] == true) || (diet == "Vegitarian" && dinnerFoods[i][x][2] == true) || (diet == "Gluten Free" && dinnerFoods[i][x][3] == true) || (diet == "None")) {
-                //set the choice between options [i] in yourBreakfast array to this food
-                console.log("i="+i, ", x="+x)
-                numDFoods+=1
+                //sets the first element of course i in personalised dinner array to name of the food in question
                 yourFinalDinner[i][0] = dinnerFoods[i][x][0]
-                yourFinalDinner[i][1] = Math.round(((dinnerNutrients[0] * eval("fractionFood"+(i+1))) / dinnerFoods[i][x][4]) * 100)
-                for(var t =0; t<4; t++){
+                yourFinalDinner[i][1] = Math.round(((dinnerNutrients[0] * eval("fractionCourse"+(i+1))) / dinnerFoods[i][x][4]) * 100) //calculates quantity in grams
+                for(var t =0; t<4; t++){//loops up to t=3
+                   
                     yourFinalDinner[i][t+2] = Math.round((yourFinalDinner[i][1]/100)*dinnerFoods[i][x][t+4])
                     if (t>0){
+                        
                         dinnerNutrients[t] += Math.round((yourFinalDinner[i][1]/100)*dinnerFoods[i][x][t+4])
                     }
                 } 
+                break //goes to next i value as we dont need another food from this course to be added to the personalised meal array
             }
         }
     }
-    console.log(dinnerNutrients, yourFinalDinner[0], yourFinalDinner[1], yourFinalDinner[2])
+    console.log(yourFinalDinner[0][0]+", "+ yourFinalDinner[0][1]+", "+ yourFinalDinner[1][0]+", "+ yourFinalDinner[1][1]+", "+ yourFinalDinner[2][0]+", "+yourFinalDinner[2][1])
     
     //to here
     /*
-    // this for loop goes through each of the options in the breakfast foods array
+    // this for loop goes through each of the courses in the breakfast foods array
     for (var i = 0; i < breakfastFoods.length; i++) {
         //this goes through the foods in the option that its currently looking at
         for (var x = 0; x < breakfastFoods[i].length; x++) {
-            //if the choice between options [i] in the yourBreakfast array is already takes, then go to the next option
+            //if the choice between courses [i] in the yourBreakfast array is already takes, then go to the next option
             if (yourBreakfast.length == i + 1) {
                 continue;
             }
             //if the user is vegan and the breakfast food is vegan
             if (diet == "Vegan" && breakfastFoods[i][x][1] == true) {
-                //set the choice between options [i] in yourBreakfast array to this food
+                //set the choice between courses [i] in yourBreakfast array to this food
                 yourBreakfast[i] = breakfastFoods[i][x]
             }
             else if (diet == "Vegitarian" && breakfastFoods[i][x][2] == true) {
