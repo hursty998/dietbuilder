@@ -522,18 +522,28 @@ header {
         color: white;
     }
     .courses {
-        display: inline;
-        width: 100%;
-        margin-right: 5%;
+        display: inline-block;
+        margin-right: 1.5%;
+        margin-left: 1.5%;
+        max-width: 30%;
+        font-size: 110%;
+        
+    }
+    .courses p{
+        font-size: 120%;
     }
 
+    #display-breakfast, #display-lunch, #display-dinner{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    #display-overview div{
+        font-size: 150%;
+    }
 
     #overview-pie-chart{
         position: absolute;
-        bottom: 0px;
-        width: 200px;
-        height: 200px;
-        left: 501px;
+        left: 50%;
     }
 }
 

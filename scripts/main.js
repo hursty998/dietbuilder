@@ -204,6 +204,7 @@ var carbQuantity
 var yourFinalBreakfast
 var yourFinalLunch
 var yourFinalDinner
+var overallNutrients
 function calculateMacros(){
     if (aim == "Lose Weight"){
         protienQuantity = weight * 2.2
@@ -283,7 +284,7 @@ function createMeals() {
     var quornSpagetti = ["Quorn Spagetti Bolognaise", true, true, false, 111, 7.8, 3.6, 18]
     var chilie = ["Chilli with Rice", false, false, true, 151, 9, 3.6, 20]
     var chickenPizza =["Chicken on Pizza", false, false, false, 291, 11, 13, 32]
-    var pepperPizza = ["Pepper an Spinich Pizza", true, true, false, 260, 3, 13, 31]
+    var pepperPizza = ["Pepper an Spinach Pizza", true, true, false, 260, 3, 13, 31]
     var veganPizza = ["Vegan Pizza Margarita", true, true, false, 260, 3, 13, 31]
     var GFpizza = ["Gluten Free Chicken Pizza", false, false, true, 291, 11, 13, 32]
     var brownie = ["Chocolate Brownie", false, true, false, 407, 4.4, 6.2, 84]
@@ -320,7 +321,7 @@ function createMeals() {
     }//output to console
     console.log("Calorie Intake: "+ calIntake, "Number of Courses: "+numCoursesInMeal)
 
-    var yourFinalBreakfast = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
+    yourFinalBreakfast = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
     // this for loop goes through each of the courses in the breakfast foods array
     for (var i = 0; i < numCoursesInMeal; i++) {
         //this goes through the foods in the course that its currently looking at
@@ -344,8 +345,8 @@ function createMeals() {
         }
     }
     console.log(yourFinalBreakfast[0][0]+", "+ yourFinalBreakfast[0][1]+", "+ yourFinalBreakfast[0][2]+", "+ yourFinalBreakfast[0][3]+", "+ yourFinalBreakfast[0][4]+", "+yourFinalBreakfast[0][5])
-
-    var yourFinalLunch = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
+    
+    yourFinalLunch = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
     // this for loop goes through each of the courses in the breakfast foods array
     for (var i = 0; i < numCoursesInMeal; i++) {
         //this goes through the foods in the option that its currently looking at
@@ -369,7 +370,7 @@ function createMeals() {
     }
     console.log(yourFinalLunch[0][0]+", "+ yourFinalLunch[0][1]+", "+ yourFinalLunch[1][0]+", \n "+ yourFinalLunch[1][1]+", "+ yourFinalLunch[2][0]+", "+yourFinalLunch[2][1])
 
-    var yourFinalDinner = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
+    yourFinalDinner = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
     // this for loop goes through each of the courses in the breakfast foods array
     for (var i = 0; i < numCoursesInMeal; i++) {
         //this goes through the foods in the option that its currently looking at
@@ -395,41 +396,47 @@ function createMeals() {
 
 }
 
-
 function displayResults(){
-    if (numCoursesInMeal==2){
-        document.getElementsByClassName("courses").style.width="40%"
-    }
-    else if (numCoursesInMeal ==3){
-        document.getElementsByClassName("courses").style.width="30%"
-    }
-    for (var i=1; i<2; i++){
+    console.log(yourFinalBreakfast[0])
+    var order =[yourFinalBreakfast, yourFinalLunch, yourFinalDinner, breakfastNutrients, lunchNutrients, dinnerNutrients]
+    for (var i=1; i<4; i++){
         for (var x=1; x<=numCoursesInMeal; x++){
-            document.getElementById("name-"+i+x).innerText=yourFinalBreakfast[x-1,0]
+            document.getElementById("name-"+i+x).innerText=order[i-1][x-1][0]+" - "+order[i-1][x-1][1]+" grams:"
+            document.getElementById("calories-"+i+x).innerText="Calories: "+order[i-1][x-1][2]
+            document.getElementById("protein-"+i+x).innerText="Protein: "+order[i-1][x-1][3]+" grams"
+            document.getElementById("fats-"+i+x).innerText="Fats: "+order[i-1][x-1][4]+" grams"
+            document.getElementById("carbs-"+i+x).innerText="Carbs: "+order[i-1][x-1][5]+" grams"
         }
     }
-
     for (var i=0; i<4; i++){
         overallNutrients[i]=breakfastNutrients[i]+lunchNutrients[i]+dinnerNutrients[i]
     }
+    document.getElementById("overview-calories").innerHTML = "Calories: <strong>"+ overallNutrients[0]+"</strong>"
+    document.getElementById("overview-protein").innerHTML = "Protein: <strong>"+ overallNutrients[1] +"</strong> grams ("+Math.round((-100*(protienQuantity-overallNutrients[1]))/protienQuantity)+"% from recomended)"
+    document.getElementById("overview-fats").innerHTML = "Fats: <strong>"+ overallNutrients[2] +"</strong> grams ("+Math.round((-100*(fatQuantity-overallNutrients[2]))/fatQuantity)+"% from recomended)"
+    document.getElementById("overview-carbs").innerHTML = "Carbs: <strong>"+ overallNutrients[3] +"</strong> grams ("+Math.round((-100*(carbQuantity-overallNutrients[3]))/carbQuantity)+"% from recomended)"
+
+    
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawOverviewChart);
 }
 
 function drawOverviewChart(){
-    var data = google.visualization.arrayToDataTable([
-        ['Macronutrients', 'Quantitied (in grams)'],
+    var data1 = google.visualization.arrayToDataTable([
+        ['Macronutrients', 'Quantities (in grams)'],
         ['Protein',  overallNutrients[1]],
         ['Fat',  overallNutrients[2]],
         ['Carbs', overallNutrients[3]]
     ]);
-    var courses = {
+    var courses1 = {
         pieSliceText: 'label',
         backgroundColor: 'transparent',
         pieSliceBorderColor: 'transparent',
         legend: 'none',
+        width: '350',
+        height: '350'
 
     };
-    var chart = new google.visualization.PieChart(document.getElementById('overview-pie-chart')); //pie-chart is the ID of the DIV i want the pie chart to be placed
-    chart.draw(data, courses);
+    var chart1 = new google.visualization.PieChart(document.getElementById('overview-pie-chart')); //pie-chart is the ID of the DIV i want the pie chart to be placed
+    chart1.draw(data1, courses1);
 }
