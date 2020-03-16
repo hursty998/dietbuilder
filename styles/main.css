@@ -506,8 +506,29 @@ header {
         height: 100%;
         left: -50px;
     }
+    .select-meal-btn{
+        margin-top: 3%;
+        display: inline;
+        background-color: transparent;
+        border: solid black 2px;
+        color: black;
+        width: 25%;
+        height: 25%;
+        margin-right: 5%;
+    }
+    .select-meal-btn:hover{
+        border-color: #007BFF;
+    }
+    #pie-chart-2{
+        position: absolute;
+        bottom: 0px;
+        width: 200px;
+        height: 200px;
+        left: 500px;
+
+    }
 }
 
-#details1-page, #details2-page, #details3-page, #confirmation-page, #results-page{
+#details1-page, #details2-page, #details3-page, #confirmation-page, #results-page, #select-meal-page, #display-breakfast, #display-lunch, #display-dinner{
     display: none;
 }

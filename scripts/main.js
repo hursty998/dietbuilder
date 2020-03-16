@@ -86,7 +86,7 @@ function next(x){
     }
     else if (x == 5){
         document.getElementById("results-page").style.display = "none"
-        document.getElementById("sample-diet-page").style.display="block"
+        document.getElementById("select-meal-page").style.display="block"
     }
     
 }
@@ -203,10 +203,10 @@ function calculateMacros(){
     document.getElementById("c1-intake").innerText = carbQuantity.toString()
 
     google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawGraph);
+    google.charts.setOnLoadCallback(drawResultsChart);
 }
 
-function drawGraph(){
+function drawResultsChart(){
     var data = google.visualization.arrayToDataTable([
         ['Macronutrients', 'Quantitied (in grams)'],
         ['Protein',  protienQuantity],
@@ -232,6 +232,7 @@ function createMeals() {
     breakfastNutrients = [calIntake * 0.25, 0, 0, 0]
     lunchNutrients = [calIntake * 0.375, 0, 0, 0]
     dinnerNutrients = [calIntake * 0.375, 0, 0, 0]
+    overallNutrients = [calIntake, 0, 0, 0]
 
     //defining each breakfast food, its dietary requirements and calories and nutrients per 100g
     //breakfast variable = [name, vegan?, vegitarian?, gluten free?, calories/100g, protien/100g, fats/100g, carbs/100g]
@@ -365,63 +366,28 @@ function createMeals() {
     }
     console.log(yourFinalDinner[0][0]+", "+ yourFinalDinner[0][1]+", "+ yourFinalDinner[1][0]+", "+ yourFinalDinner[1][1]+", "+ yourFinalDinner[2][0]+", "+yourFinalDinner[2][1])
     
-    //to here
-    /*
-    // this for loop goes through each of the courses in the breakfast foods array
-    for (var i = 0; i < breakfastFoods.length; i++) {
-        //this goes through the foods in the option that its currently looking at
-        for (var x = 0; x < breakfastFoods[i].length; x++) {
-            //if the choice between courses [i] in the yourBreakfast array is already takes, then go to the next option
-            if (yourBreakfast.length == i + 1) {
-                continue;
-            }
-            //if the user is vegan and the breakfast food is vegan
-            if (diet == "Vegan" && breakfastFoods[i][x][1] == true) {
-                //set the choice between courses [i] in yourBreakfast array to this food
-                yourBreakfast[i] = breakfastFoods[i][x]
-            }
-            else if (diet == "Vegitarian" && breakfastFoods[i][x][2] == true) {
-                yourBreakfast[i] = breakfastFoods[i][x]
-            }
-            else if (diet == "Gluten Free" && breakfastFoods[i][x][3] == true) {
-                yourBreakfast[i] = breakfastFoods[i][x]
-            }
-            else if (diet == "None") {
-                yourBreakfast[i] = breakfastFoods[i][x]
-            }
-        }
+    for (var i=0; i<4; i++){
+        overallNutrients[i]=breakfastNutrients[i]+lunchNutrients[i]+dinnerNutrients[i]
     }
-    console.log(yourBreakfast[0][0], yourBreakfast[1][0], yourBreakfast[2][0])
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawOverviewChart);
 
-    var yourFinalBreakfast = [[0,0],[0,0],[0,0]] //[[name, quantity],[name, quantity], [name,quantity]]
-    var z;
-    if (breakfastNutrients[0] >= 700) {
-        z = 3
-        yourFinalBreakfast[0][0] = yourBreakfast[0][0]
-        yourFinalBreakfast[0][1] =Math.round(((breakfastNutrients[0] * 0.5) / yourBreakfast[0][4]) * 100)
-        yourFinalBreakfast[1][0] = yourBreakfast[0][0]
-        yourFinalBreakfast[1][1] = Math.round(((breakfastNutrients[0] * 0.4) / yourBreakfast[1][4]) * 100)
-        yourFinalBreakfast[2][0] = yourBreakfast[0][0]
-        yourFinalBreakfast[2][1] = Math.round(((breakfastNutrients[0] * 0.1) / yourBreakfast[2][4]) * 100)
-    }
-    else if (breakfastNutrients[0] >= 300 && breakfastNutrients[0] < 700) {
-        z=2
-        yourFinalBreakfast[0][0] = yourBreakfast[0][0]
-        yourFinalBreakfast[0][1] = Math.round(((breakfastNutrients[0] * 0.65) / yourBreakfast[0][4]) * 100)
-        yourFinalBreakfast[1][0] = yourBreakfast[1][0]
-        yourFinalBreakfast[1][1] = Math.round(((breakfastNutrients[0] * 0.35) / yourBreakfast[1][4]) * 100)
-    }
-    else {
-        z=1
-        yourFinalBreakfast[0][0] = yourBreakfast[0][0]
-        yourFinalBreakfast[0][1] = Math.round((breakfastNutrients[0]/yourBreakfast[0][4])*100)
-    }
-    
+}
 
-    for (var i =0; i<z; i++){
-        for(var t =0; t<4; t++){
-            yourFinalBreakfast[i][t+2]=Math.round((yourFinalBreakfast[i][1]/100)*yourBreakfast[i][t+4])
-        }  
-    }
-    console.log(breakfastNutrients[0], yourFinalBreakfast[0], yourFinalBreakfast[1], yourFinalBreakfast[2])*/
+function drawOverviewChart(){
+    var data = google.visualization.arrayToDataTable([
+        ['Macronutrients', 'Quantitied (in grams)'],
+        ['Protein',  overallNutrients[1]],
+        ['Fat',  overallNutrients[2]],
+        ['Carbs', overallNutrients[3]]
+    ]);
+    var courses = {
+        pieSliceText: 'label',
+        backgroundColor: 'transparent',
+        pieSliceBorderColor: 'transparent',
+        legend: 'none',
+
+    };
+    var chart = new google.visualization.PieChart(document.getElementById('pie-chart-2')); //pie-chart is the ID of the DIV i want the pie chart to be placed
+    chart.draw(data, courses);
 }
