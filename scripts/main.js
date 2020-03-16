@@ -5,6 +5,7 @@ var weight = 0
 var activity = "Low"
 var aim = "Lose Weight"
 var diet = "Vegan"
+var numCoursesInMeal;
 
 window.onload = function () {
     changeAge()
@@ -81,13 +82,36 @@ function next(x){
         calculateMacros()
         document.getElementById("confirmation-page").style.display="none"
         document.getElementById("details1-page").style.display="none"
+        document.getElementById("select-meal-page").style.display="none"
         document.getElementById("results-page").style.display = "block"
         createMeals()
+        displayResults()
     }
     else if (x == 5){
         document.getElementById("results-page").style.display = "none"
         document.getElementById("select-meal-page").style.display="block"
+        document.getElementById("display-breakfast").style.display = "none"
+        document.getElementById("display-lunch").style.display = "none"
+        document.getElementById("display-dinner").style.display = "none"
+        document.getElementById("display-overview").style.display = "none"
     }
+    else if (x == 6){
+        document.getElementById("select-meal-page").style.display="none"
+        document.getElementById("display-breakfast").style.display = "block"
+    }
+    else if (x == 7){
+        document.getElementById("select-meal-page").style.display="none"
+        document.getElementById("display-lunch").style.display = "block"
+    }
+    else if (x == 8){
+        document.getElementById("select-meal-page").style.display="none"
+        document.getElementById("display-dinner").style.display = "block"
+    }
+    else if (x == 9){
+        document.getElementById("select-meal-page").style.display="none"
+        document.getElementById("display-overview").style.display = "block"
+    }
+
     
 }
 
@@ -177,6 +201,9 @@ function calculateCalories(){
 var protienQuantity
 var fatQuantity
 var carbQuantity
+var yourFinalBreakfast
+var yourFinalLunch
+var yourFinalDinner
 function calculateMacros(){
     if (aim == "Lose Weight"){
         protienQuantity = weight * 2.2
@@ -275,7 +302,7 @@ function createMeals() {
 
     
     //from here
-    var numCoursesInMeal, fractionCourse1, fractionCourse2, fractionCourse3;
+    var fractionCourse1, fractionCourse2, fractionCourse3;
     if (calIntake >= 2700) { //if calorie intake is greater than 2700
         numCoursesInMeal=3 //number of courses in each meal = 3
         fractionCourse1 = 0.5 //the fraction of the calories in each that should come from course 1
@@ -316,7 +343,7 @@ function createMeals() {
             }
         }
     }
-    //console.log(yourFinalBreakfast[0][0]+", "+ yourFinalBreakfast[0][1]+", "+ yourFinalBreakfast[0][2]+", "+ yourFinalBreakfast[0][3]+", "+ yourFinalBreakfast[0][4]+", "+yourFinalBreakfast[0][5])
+    console.log(yourFinalBreakfast[0][0]+", "+ yourFinalBreakfast[0][1]+", "+ yourFinalBreakfast[0][2]+", "+ yourFinalBreakfast[0][3]+", "+ yourFinalBreakfast[0][4]+", "+yourFinalBreakfast[0][5])
 
     var yourFinalLunch = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
     // this for loop goes through each of the courses in the breakfast foods array
@@ -340,7 +367,7 @@ function createMeals() {
             }
         }
     }
-    //console.log(yourFinalLunch[0][0]+", "+ yourFinalLunch[0][1]+", "+ yourFinalLunch[1][0]+", \n "+ yourFinalLunch[1][1]+", "+ yourFinalLunch[2][0]+", "+yourFinalLunch[2][1])
+    console.log(yourFinalLunch[0][0]+", "+ yourFinalLunch[0][1]+", "+ yourFinalLunch[1][0]+", \n "+ yourFinalLunch[1][1]+", "+ yourFinalLunch[2][0]+", "+yourFinalLunch[2][1])
 
     var yourFinalDinner = [[],[],[]] //[[name, quantity],[name, quantity], [name,quantity]]
     // this for loop goes through each of the courses in the breakfast foods array
@@ -365,13 +392,28 @@ function createMeals() {
         }
     }
     console.log(yourFinalDinner[0][0]+", "+ yourFinalDinner[0][1]+", "+ yourFinalDinner[1][0]+", "+ yourFinalDinner[1][1]+", "+ yourFinalDinner[2][0]+", "+yourFinalDinner[2][1])
-    
+
+}
+
+
+function displayResults(){
+    if (numCoursesInMeal==2){
+        document.getElementsByClassName("courses").style.width="40%"
+    }
+    else if (numCoursesInMeal ==3){
+        document.getElementsByClassName("courses").style.width="30%"
+    }
+    for (var i=1; i<2; i++){
+        for (var x=1; x<=numCoursesInMeal; x++){
+            document.getElementById("name-"+i+x).innerText=yourFinalBreakfast[x-1,0]
+        }
+    }
+
     for (var i=0; i<4; i++){
         overallNutrients[i]=breakfastNutrients[i]+lunchNutrients[i]+dinnerNutrients[i]
     }
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawOverviewChart);
-
 }
 
 function drawOverviewChart(){
@@ -388,6 +430,6 @@ function drawOverviewChart(){
         legend: 'none',
 
     };
-    var chart = new google.visualization.PieChart(document.getElementById('pie-chart-2')); //pie-chart is the ID of the DIV i want the pie chart to be placed
+    var chart = new google.visualization.PieChart(document.getElementById('overview-pie-chart')); //pie-chart is the ID of the DIV i want the pie chart to be placed
     chart.draw(data, courses);
 }

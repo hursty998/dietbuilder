@@ -103,20 +103,30 @@
             </div>
             <div id="select-meal-page" class="white-box">
                 <h1>Personalised Sample Plan</h1>
-                <button class="select-meal-btn"><i class="fas fa-coffee"></i><br> Breakfast</button>
-                <button class="select-meal-btn"><i class="fas fa-hotdog"></i><br> Lunch</button>
-                <button class="select-meal-btn"><i class="fas fa-utensils"></i><br> Dinner</button>
-                <h2 style="margin-top: 3%; float: left;">Plan overview:</h2><br>
-                <div id="pie-chart-2"></div>
+                <button class="select-meal-btn" onclick="next(6)"><i class="fas fa-coffee"></i><br> Breakfast</button>
+                <button class="select-meal-btn" onclick="next(7)"><i class="fas fa-hotdog"></i><br> Lunch</button>
+                <button class="select-meal-btn" onclick="next(8)"><i class="fas fa-utensils"></i><br> Dinner</button>
+                <button class="select-meal-btn" onclick="next(9)"><i class="fas fa-chart-pie"></i><br> Overview</button>
+                <button class="back" onclick="next(4)">Back</button>
+                <!--<div id="pie-chart-2"></div> -->
             </div>
             <div id="display-breakfast" class="white-box">
-
+                <h1>Sample Breakfast Meal</h1>
+                <div></div>
+                <button class="back" onclick="next(5)">Back</button>
             </div>
             <div id="display-lunch" class="white-box">
-
+                <h1>Sample Lunch Meal</h1>
+                <button class="back" onclick="next(5)">Back</button>
             </div>
             <div id="display-dinner" class="white-box">
-
+                <h1>Sample Dinner Meal</h1>
+                <button class="back" onclick="next(5)">Back</button>
+            </div>
+            <div id="display-overview" class="white-box">
+                <h1>Sample Meals Overview</h1>
+                <div id="overview-pie-chart"></div>
+                <button class="back" onclick="next(5)">Back</button>
             </div>
         </div>
     </main>

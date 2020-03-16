@@ -517,9 +517,18 @@ header {
         margin-right: 5%;
     }
     .select-meal-btn:hover{
-        border-color: #007BFF;
+        background-color: #007BFF;
+        border: none;
+        color: white;
     }
-    #pie-chart-2{
+    .courses {
+        display: inline;
+        width: 100%;
+        margin-right: 5%;
+    }
+
+
+    #overview-pie-chart{
         position: absolute;
         bottom: 0px;
         width: 200px;
@@ -528,7 +537,7 @@ header {
     }
 }
 
-#details1-page, #details2-page, #details3-page, #confirmation-page, #results-page, #select-meal-page, #display-breakfast, #display-lunch, #display-dinner{
+#details1-page, #details2-page, #details3-page, #confirmation-page, #results-page, #select-meal-page, #display-breakfast, #display-lunch, #display-dinner, #display-overview{
     display: none;
 
 }
