@@ -524,11 +524,11 @@ header {
         bottom: 0px;
         width: 200px;
         height: 200px;
-        left: 500px;
-
+        left: 501px;
     }
 }
 
 #details1-page, #details2-page, #details3-page, #confirmation-page, #results-page, #select-meal-page, #display-breakfast, #display-lunch, #display-dinner{
     display: none;
+
 }
