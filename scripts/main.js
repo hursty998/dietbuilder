@@ -85,29 +85,30 @@ function next(x){
         document.getElementById("select-meal-page").style.display="none"
         document.getElementById("results-page").style.display = "block"
         createMeals()
-        displayResults()
+        for (var i=0; i<4; i++){
+            overallNutrients[i]=breakfastNutrients[i]+lunchNutrients[i]+dinnerNutrients[i]
+        }
+        document.getElementById("overview-calories").innerHTML = "Calories: <strong>"+ overallNutrients[0]+"</strong>"
+        document.getElementById("overview-protein").innerHTML = "Protein: <strong>"+ overallNutrients[1] +"</strong> grams ("+Math.round((-100*(protienQuantity-overallNutrients[1]))/protienQuantity)+"% from recomended)"
+        document.getElementById("overview-fats").innerHTML = "Fats: <strong>"+ overallNutrients[2] +"</strong> grams ("+Math.round((-100*(fatQuantity-overallNutrients[2]))/fatQuantity)+"% from recomended)"
+        document.getElementById("overview-carbs").innerHTML = "Carbs: <strong>"+ overallNutrients[3] +"</strong> grams ("+Math.round((-100*(carbQuantity-overallNutrients[3]))/carbQuantity)+"% from recomended)"
+    
+        
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawOverviewChart);
     }
     else if (x == 5){
         document.getElementById("results-page").style.display = "none"
         document.getElementById("select-meal-page").style.display="block"
-        document.getElementById("display-breakfast").style.display = "none"
-        document.getElementById("display-lunch").style.display = "none"
-        document.getElementById("display-dinner").style.display = "none"
+        document.getElementById("display-meal").style.display = "none"
         document.getElementById("display-overview").style.display = "none"
+
     }
     else if (x == 6){
         document.getElementById("select-meal-page").style.display="none"
-        document.getElementById("display-breakfast").style.display = "block"
+        document.getElementById("display-meal").style.display = "block"
     }
     else if (x == 7){
-        document.getElementById("select-meal-page").style.display="none"
-        document.getElementById("display-lunch").style.display = "block"
-    }
-    else if (x == 8){
-        document.getElementById("select-meal-page").style.display="none"
-        document.getElementById("display-dinner").style.display = "block"
-    }
-    else if (x == 9){
         document.getElementById("select-meal-page").style.display="none"
         document.getElementById("display-overview").style.display = "block"
     }
@@ -264,31 +265,31 @@ function createMeals() {
 
     //defining each breakfast food, its dietary requirements and calories and nutrients per 100g
     //breakfast variable = [name, vegan?, vegitarian?, gluten free?, calories/100g, protien/100g, fats/100g, carbs/100g]
-    var yogurtGranola = ["Granola with Yogurt", false, true, false,136, 7.7, 3.1, 20.3]
-    var porridge = ["Porridge", true, true, true, 96, 5, 2.6, 13.5]
-    var baconEggs = ["Bacon and fried Eggs", false, false, true, 305, 22.3, 23, 1.2]
-    var eggsToast = ["Boiled Eggs on Toast", false, true, false, 181, 11.4, 8.8, 12.8]
-    var proteinShake = ["Protein Shake", true, true, true, 68, 7.6, 3.4, 1]
-    var banana = ["Banana", true, true, true, 84, 1, 0.3, 21.6]
+    var yogurtGranola = ["Granola with Yogurt", false, true, false,136, 7.7, 3.1, 20.3, "yogurtGranola.jpeg"]
+    var porridge = ["Porridge", true, true, true, 96, 5, 2.6, 13.5, "porridge.jpg"]
+    var baconEggs = ["Bacon and fried Eggs", false, false, true, 305, 22.3, 23, 1.2, "baconEggs.jpg"]
+    var eggsToast = ["Boiled Eggs on Toast", false, true, false, 181, 11.4, 8.8, 12.8, "eggsToast.jpg"]
+    var proteinShake = ["Protein Shake", true, true, true, 68, 7.6, 3.4, 1, "proteinShake.jpg"]
+    var banana = ["Banana", true, true, true, 84, 1, 0.3, 21.6, "banana.jpg"]
 
-    var pastaChicken = ["Pesto Pasta & Chicken", false, false, false, 150, 17, 2.3, 15]
-    var pastaTofu = ["Pesto Pasta & Tofu", true, true, false,210, 12.5, 10.8, 19.5]
-    var riceChicken = ["Chicken with Rice", false, false, true, 248.5, 17.3, 1.7, 40]
-    var avacadosEggs = ["Avacados & Eggs on Toast", false, true, false, 205, 7.1, 9.6, 21.7]
-    var avacadosToast = ["Avacados on Toast", true, true, false, 236.5, 7.5, 9.7, 32.3]
-    var avacadosGF = ["Avacados & Eggs on Gluten Free Toast", false, true, true, 205, 7.1, 9.6, 21.7]
-    var yogurt = ["Natural Vanilla Yogurt", false, true, true, 78, 2.9, 0, 17]
-    var apple = ["Apple", true, true, true, 52, 0.3, 0.2, 14]
+    var pastaChicken = ["Pesto Pasta & Chicken", false, false, false, 150, 17, 2.3, 15, "pastaChicken.jpg"]
+    var pastaTofu = ["Pesto Pasta & Tofu", true, true, false,210, 12.5, 10.8, 19.5, "pastaTofu.jpg"]
+    var riceChicken = ["Chicken with Rice", false, false, true, 248.5, 17.3, 1.7, 40, "riceChicken.jpg"]
+    var avacadosEggs = ["Avacados & Eggs on Toast", false, true, false, 205, 7.1, 9.6, 21.7, "avacadosEggs.jpg"]
+    var avacadosToast = ["Avacados on Toast", true, true, false, 236.5, 7.5, 9.7, 32.3, "avacadosToast.jpeg"]
+    var avacadosGF = ["Avacados & Eggs on Gluten Free Toast", false, true, true, 205, 7.1, 9.6, 21.7, "avacadosGF.jpg"]
+    var yogurt = ["Natural Vanilla Yogurt", false, true, true, 78, 2.9, 0, 17, "yogurt.jpg"]
+    var apple = ["Apple", true, true, true, 52, 0.3, 0.2, 14, "apple.jpg"]
 
-    var spagetti = ["Spagetti Bolognasie", false, false, false, 121, 5.8, 3.6, 16]
-    var quornSpagetti = ["Quorn Spagetti Bolognaise", true, true, false, 111, 7.8, 3.6, 18]
-    var chilie = ["Chilli with Rice", false, false, true, 151, 9, 3.6, 20]
-    var chickenPizza =["Chicken on Pizza", false, false, false, 291, 11, 13, 32]
-    var pepperPizza = ["Pepper an Spinach Pizza", true, true, false, 260, 3, 13, 31]
-    var veganPizza = ["Vegan Pizza Margarita", true, true, false, 260, 3, 13, 31]
-    var GFpizza = ["Gluten Free Chicken Pizza", false, false, true, 291, 11, 13, 32]
-    var brownie = ["Chocolate Brownie", false, true, false, 407, 4.4, 6.2, 84]
-    var icecream = ["Plant Based Icecream", true, true, true, 207, 3.5, 11, 24]
+    var spagetti = ["Spagetti Bolognese", false, false, false, 121, 5.8, 3.6, 16, "spagetti.jpg"]
+    var quornSpagetti = ["Quorn Spagetti Bolognaise", true, true, false, 111, 7.8, 3.6, 18, "quornSpagetti.jpg"]
+    var chilie = ["Chili with Rice", false, false, true, 151, 9, 3.6, 20, "chilie.jpg"]
+    var chickenPizza =["Chicken on Pizza", false, false, false, 291, 11, 13, 32, "chickenPizza.jpg"]
+    var pepperPizza = ["Pepper an Spinach Pizza", true, true, false, 260, 3, 13, 31, "pepperPizza.jpg"]
+    var veganPizza = ["Vegan Pizza Margarita", true, true, false, 260, 3, 13, 31, "veganPizza.jpg"]
+    var GFpizza = ["Gluten Free Chicken Pizza", false, false, true, 291, 11, 13, 32, "GFPizza.jpg"]
+    var brownie = ["Chocolate Brownie", false, true, false, 407, 4.4, 6.2, 84, "brownie.jpg"]
+    var icecream = ["Plant Based Icecream", true, true, true, 207, 3.5, 11, 24, "icecream.jpg"]
 
 
 
@@ -332,6 +333,7 @@ function createMeals() {
                 //sets the first element of course i in personalised breakfast array to name of the food in question
                 yourFinalBreakfast[i][0] = breakfastFoods[i][x][0] 
                 yourFinalBreakfast[i][1] = Math.round(((breakfastNutrients[0] * eval("fractionCourse"+(i+1))) / breakfastFoods[i][x][4]) * 100) //calculates quantity in grams
+                yourFinalBreakfast[i][6] = breakfastFoods[i][x][8]
                 for(var t =0; t<4; t++){ //loops up to t=3
                     //set the t+1 position of the food being added in personalised breakfast array to the amount calories and nutrients in this quantity of food
                     yourFinalBreakfast[i][t+2] = Math.round((yourFinalBreakfast[i][1]/100)*breakfastFoods[i][x][t+4])
@@ -356,6 +358,7 @@ function createMeals() {
                 //sets the first element of course i in personalised lunch array to name of the food in question
                 yourFinalLunch[i][0] = lunchFoods[i][x][0]
                 yourFinalLunch[i][1] = Math.round(((lunchNutrients[0] * eval("fractionCourse"+(i+1))) / lunchFoods[i][x][4]) * 100) //calculates quantity in grams
+                yourFinalLunch[i][6] = lunchFoods[i][x][8]
                 for(var t =0; t<4; t++){ //loops up to t=3
                     //set the t+1 position of the food being added in personalised lunch array to the amount calories and nutrients in this quantity of food
                     yourFinalLunch[i][t+2] = Math.round((yourFinalLunch[i][1]/100)*lunchFoods[i][x][t+4])
@@ -380,6 +383,7 @@ function createMeals() {
                 //sets the first element of course i in personalised dinner array to name of the food in question
                 yourFinalDinner[i][0] = dinnerFoods[i][x][0]
                 yourFinalDinner[i][1] = Math.round(((dinnerNutrients[0] * eval("fractionCourse"+(i+1))) / dinnerFoods[i][x][4]) * 100) //calculates quantity in grams
+                yourFinalDinner[i][6] = dinnerFoods[i][x][8]
                 for(var t =0; t<4; t++){//loops up to t=3
                    
                     yourFinalDinner[i][t+2] = Math.round((yourFinalDinner[i][1]/100)*dinnerFoods[i][x][t+4])
@@ -394,31 +398,6 @@ function createMeals() {
     }
     console.log(yourFinalDinner[0][0]+", "+ yourFinalDinner[0][1]+", "+ yourFinalDinner[1][0]+", "+ yourFinalDinner[1][1]+", "+ yourFinalDinner[2][0]+", "+yourFinalDinner[2][1])
 
-}
-
-function displayResults(){
-    console.log(yourFinalBreakfast[0])
-    var order =[yourFinalBreakfast, yourFinalLunch, yourFinalDinner, breakfastNutrients, lunchNutrients, dinnerNutrients]
-    for (var i=1; i<4; i++){
-        for (var x=1; x<=numCoursesInMeal; x++){
-            document.getElementById("name-"+i+x).innerText=order[i-1][x-1][0]+" - "+order[i-1][x-1][1]+" grams:"
-            document.getElementById("calories-"+i+x).innerText="Calories: "+order[i-1][x-1][2]
-            document.getElementById("protein-"+i+x).innerText="Protein: "+order[i-1][x-1][3]+" grams"
-            document.getElementById("fats-"+i+x).innerText="Fats: "+order[i-1][x-1][4]+" grams"
-            document.getElementById("carbs-"+i+x).innerText="Carbs: "+order[i-1][x-1][5]+" grams"
-        }
-    }
-    for (var i=0; i<4; i++){
-        overallNutrients[i]=breakfastNutrients[i]+lunchNutrients[i]+dinnerNutrients[i]
-    }
-    document.getElementById("overview-calories").innerHTML = "Calories: <strong>"+ overallNutrients[0]+"</strong>"
-    document.getElementById("overview-protein").innerHTML = "Protein: <strong>"+ overallNutrients[1] +"</strong> grams ("+Math.round((-100*(protienQuantity-overallNutrients[1]))/protienQuantity)+"% from recomended)"
-    document.getElementById("overview-fats").innerHTML = "Fats: <strong>"+ overallNutrients[2] +"</strong> grams ("+Math.round((-100*(fatQuantity-overallNutrients[2]))/fatQuantity)+"% from recomended)"
-    document.getElementById("overview-carbs").innerHTML = "Carbs: <strong>"+ overallNutrients[3] +"</strong> grams ("+Math.round((-100*(carbQuantity-overallNutrients[3]))/carbQuantity)+"% from recomended)"
-
-    
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawOverviewChart);
 }
 
 function drawOverviewChart(){
@@ -437,6 +416,57 @@ function drawOverviewChart(){
         height: '350'
 
     };
-    var chart1 = new google.visualization.PieChart(document.getElementById('overview-pie-chart')); //pie-chart is the ID of the DIV i want the pie chart to be placed
-    chart1.draw(data1, courses1);
+    /*var chart1 = new google.visualization.PieChart(document.getElementById('overview-pie-chart')); //pie-chart is the ID of the DIV i want the pie chart to be placed
+    chart1.draw(data1, courses1);*/
+}
+
+var mealNum
+function changeElement(whichMeal, courseNum){
+    var order = [yourFinalBreakfast, yourFinalLunch, yourFinalDinner]
+    if (courseNum == 1 & numCoursesInMeal>1){
+        document.getElementById("left-arrow").style.display="none"
+        document.getElementById("right-arrow").style.display="inline-block"
+        document.getElementById("right-arrow").onclick = function(){changeElement(0,2);}
+    }
+    else if(courseNum==2 & numCoursesInMeal>2){
+        document.getElementById("right-arrow").style.display="inline-block"
+        document.getElementById("left-arrow").style.display="inline-block"
+        document.getElementById("left-arrow").onclick = function(){changeElement(0,1);}
+        document.getElementById("right-arrow").onclick = function(){changeElement(0,3);}
+    }
+    else if(courseNum == 2 & numCoursesInMeal==2){
+        document.getElementById("right-arrow").style.display="none"
+        document.getElementById("left-arrow").style.display="inline-block"
+        document.getElementById("left-arrow").onclick = function(){changeElement(0,1);}
+    }
+    else if (courseNum == 3){ 
+        document.getElementById("left-arrow").style.display="inline-block"
+        document.getElementById("left-arrow").onclick = function(){changeElement(0,2);}
+        document.getElementById("right-arrow").style.display="none"
+    }
+    else{
+        document.getElementById("left-arrow").style.display="none"
+        document.getElementById("right-arrow").style.display="none"
+    }
+    if (whichMeal ==1 || whichMeal ==2 || whichMeal ==3){
+        mealNum = whichMeal-1
+    }
+    if (mealNum == 0){
+        document.getElementById("meal-title").innerText= "Sample Breakfast Meal"
+    }
+    else if (mealNum ==1){
+        document.getElementById("meal-title").innerText= "Sample Lunch Meal"
+    }
+    else{
+        document.getElementById("meal-title").innerText= "Sample Dinner Meal"
+    }
+
+    document.getElementById("course-number").innerHTML = "Course: "+courseNum
+    document.getElementById("course-number").style.display="inline-block;"
+    document.getElementById("course-name").innerHTML = "<strong>"+order[mealNum][courseNum-1][0]+" - "+order[mealNum][courseNum-1][1]+"</strong>"
+    document.getElementById("course-calories").innerHTML = "Calories: <strong>"+ order[mealNum][courseNum-1][2]+"</strong>"
+    document.getElementById("course-protein").innerHTML = "Protein: <strong>"+ order[mealNum][courseNum-1][3]+"</strong> grams"
+    document.getElementById("course-fats").innerHTML = "Fats: <strong>"+order[mealNum][courseNum-1][4]+"</strong> grams"
+    document.getElementById("course-carbs").innerHTML = "Carbs: <strong>"+order[mealNum][courseNum-1][5]+"</strong> grams"
+    document.getElementById("course-img").src ="styles/assets/"+ order[mealNum][courseNum-1][6]
 }
