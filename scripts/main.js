@@ -463,7 +463,7 @@ function changeElement(whichMeal, courseNum){
 
     document.getElementById("course-number").innerHTML = "Course: "+courseNum
     document.getElementById("course-number").style.display="inline-block;"
-    document.getElementById("course-name").innerHTML = "<strong>"+order[mealNum][courseNum-1][0]+" - "+order[mealNum][courseNum-1][1]+"</strong>"
+    document.getElementById("course-name").innerHTML = "<strong>"+order[mealNum][courseNum-1][0]+" - "+order[mealNum][courseNum-1][1]+"</strong> grams"
     document.getElementById("course-calories").innerHTML = "Calories: <strong>"+ order[mealNum][courseNum-1][2]+"</strong>"
     document.getElementById("course-protein").innerHTML = "Protein: <strong>"+ order[mealNum][courseNum-1][3]+"</strong> grams"
     document.getElementById("course-fats").innerHTML = "Fats: <strong>"+order[mealNum][courseNum-1][4]+"</strong> grams"
