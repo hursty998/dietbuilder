@@ -85,17 +85,7 @@ function next(x){
         document.getElementById("select-meal-page").style.display="none"
         document.getElementById("results-page").style.display = "block"
         createMeals()
-        for (var i=0; i<4; i++){
-            overallNutrients[i]=breakfastNutrients[i]+lunchNutrients[i]+dinnerNutrients[i]
-        }
-        document.getElementById("overview-calories").innerHTML = "Calories: <strong>"+ overallNutrients[0]+"</strong>"
-        document.getElementById("overview-protein").innerHTML = "Protein: <strong>"+ overallNutrients[1] +"</strong> grams ("+Math.round((-100*(protienQuantity-overallNutrients[1]))/protienQuantity)+"% from recomended)"
-        document.getElementById("overview-fats").innerHTML = "Fats: <strong>"+ overallNutrients[2] +"</strong> grams ("+Math.round((-100*(fatQuantity-overallNutrients[2]))/fatQuantity)+"% from recomended)"
-        document.getElementById("overview-carbs").innerHTML = "Carbs: <strong>"+ overallNutrients[3] +"</strong> grams ("+Math.round((-100*(carbQuantity-overallNutrients[3]))/carbQuantity)+"% from recomended)"
-    
-        
-        google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawOverviewChart);
+        editOverview()
     }
     else if (x == 5){
         document.getElementById("results-page").style.display = "none"
@@ -400,6 +390,56 @@ function createMeals() {
 
 }
 
+var mealNum
+function changeElement(whichMeal, whichCourse){
+    var order = [yourFinalBreakfast, yourFinalLunch, yourFinalDinner]
+
+    document.getElementById("left-arrow").onclick = function(){changeElement(whichMeal,whichCourse-1);}
+    document.getElementById("right-arrow").onclick = function(){changeElement(whichMeal,whichCourse+1);}
+    document.getElementById("right-arrow").style.display="inline-block"
+    document.getElementById("left-arrow").style.display="inline-block"
+    if (whichCourse==1){
+        document.getElementById("left-arrow").style.display="none"
+    }
+    else if (whichCourse==numCoursesInMeal){
+        document.getElementById("right-arrow").style.display="none"
+    }
+
+    if(whichMeal == 1){
+        document.getElementById("meal-title").innerText= "Sample Breakfast Meal"
+    }
+    else if(whichMeal==2){
+        document.getElementById("meal-title").innerText= "Sample Lunch Meal"
+    }
+    else{
+        document.getElementById("meal-title").innerText= "Sample Dinner Meal"
+    }
+
+
+    document.getElementById("course-number").innerHTML = "Course: "+whichCourse
+    document.getElementById("course-number").style.display="inline-block;"
+    document.getElementById("course-name").innerHTML = "<strong>"+order[whichMeal-1][whichCourse-1][0]+" - "+order[whichMeal-1][whichCourse-1][1]+"</strong> grams"
+    document.getElementById("course-calories").innerHTML = "Calories: <strong>"+ order[whichMeal-1][whichCourse-1][2]+"</strong>"
+    document.getElementById("course-protein").innerHTML = "Protein: <strong>"+ order[whichMeal-1][whichCourse-1][3]+"</strong> grams"
+    document.getElementById("course-fats").innerHTML = "Fats: <strong>"+order[whichMeal-1][whichCourse-1][4]+"</strong> grams"
+    document.getElementById("course-carbs").innerHTML = "Carbs: <strong>"+order[whichMeal-1][whichCourse-1][5]+"</strong> grams"
+    document.getElementById("course-img").src ="styles/assets/"+ order[whichMeal-1][whichCourse-1][6]
+    
+}
+
+function editOverview(){
+    for (var i=0; i<4; i++){
+        overallNutrients[i]=breakfastNutrients[i]+lunchNutrients[i]+dinnerNutrients[i]
+    }
+    document.getElementById("overview-calories").innerHTML = "Calories: <strong>"+ overallNutrients[0]+"</strong>"
+    document.getElementById("overview-protein").innerHTML = "Protein: <strong>"+ overallNutrients[1] +"</strong> grams ("+Math.round((-100*(protienQuantity-overallNutrients[1]))/protienQuantity)+"% from recomended)"
+    document.getElementById("overview-fats").innerHTML = "Fats: <strong>"+ overallNutrients[2] +"</strong> grams ("+Math.round((-100*(fatQuantity-overallNutrients[2]))/fatQuantity)+"% from recomended)"
+    document.getElementById("overview-carbs").innerHTML = "Carbs: <strong>"+ overallNutrients[3] +"</strong> grams ("+Math.round((-100*(carbQuantity-overallNutrients[3]))/carbQuantity)+"% from recomended)"
+
+    
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawOverviewChart);
+}
 function drawOverviewChart(){
     var data1 = google.visualization.arrayToDataTable([
         ['Macronutrients', 'Quantities (in grams)'],
@@ -418,55 +458,4 @@ function drawOverviewChart(){
     };
     /*var chart1 = new google.visualization.PieChart(document.getElementById('overview-pie-chart')); //pie-chart is the ID of the DIV i want the pie chart to be placed
     chart1.draw(data1, courses1);*/
-}
-
-var mealNum
-function changeElement(whichMeal, courseNum){
-    var order = [yourFinalBreakfast, yourFinalLunch, yourFinalDinner]
-    if (courseNum == 1 & numCoursesInMeal>1){
-        document.getElementById("left-arrow").style.display="none"
-        document.getElementById("right-arrow").style.display="inline-block"
-        document.getElementById("right-arrow").onclick = function(){changeElement(0,2);}
-    }
-    else if(courseNum==2 & numCoursesInMeal>2){
-        document.getElementById("right-arrow").style.display="inline-block"
-        document.getElementById("left-arrow").style.display="inline-block"
-        document.getElementById("left-arrow").onclick = function(){changeElement(0,1);}
-        document.getElementById("right-arrow").onclick = function(){changeElement(0,3);}
-    }
-    else if(courseNum == 2 & numCoursesInMeal==2){
-        document.getElementById("right-arrow").style.display="none"
-        document.getElementById("left-arrow").style.display="inline-block"
-        document.getElementById("left-arrow").onclick = function(){changeElement(0,1);}
-    }
-    else if (courseNum == 3){ 
-        document.getElementById("left-arrow").style.display="inline-block"
-        document.getElementById("left-arrow").onclick = function(){changeElement(0,2);}
-        document.getElementById("right-arrow").style.display="none"
-    }
-    else{
-        document.getElementById("left-arrow").style.display="none"
-        document.getElementById("right-arrow").style.display="none"
-    }
-    if (whichMeal ==1 || whichMeal ==2 || whichMeal ==3){
-        mealNum = whichMeal-1
-    }
-    if (mealNum == 0){
-        document.getElementById("meal-title").innerText= "Sample Breakfast Meal"
-    }
-    else if (mealNum ==1){
-        document.getElementById("meal-title").innerText= "Sample Lunch Meal"
-    }
-    else{
-        document.getElementById("meal-title").innerText= "Sample Dinner Meal"
-    }
-
-    document.getElementById("course-number").innerHTML = "Course: "+courseNum
-    document.getElementById("course-number").style.display="inline-block;"
-    document.getElementById("course-name").innerHTML = "<strong>"+order[mealNum][courseNum-1][0]+" - "+order[mealNum][courseNum-1][1]+"</strong> grams"
-    document.getElementById("course-calories").innerHTML = "Calories: <strong>"+ order[mealNum][courseNum-1][2]+"</strong>"
-    document.getElementById("course-protein").innerHTML = "Protein: <strong>"+ order[mealNum][courseNum-1][3]+"</strong> grams"
-    document.getElementById("course-fats").innerHTML = "Fats: <strong>"+order[mealNum][courseNum-1][4]+"</strong> grams"
-    document.getElementById("course-carbs").innerHTML = "Carbs: <strong>"+order[mealNum][courseNum-1][5]+"</strong> grams"
-    document.getElementById("course-img").src ="styles/assets/"+ order[mealNum][courseNum-1][6]
 }
