@@ -27,13 +27,16 @@
                 <button class="radio1" id="opt-male" onclick="radio('opt-male','opt-female',0,0); changeGender('Male')"><i class="fas fa-mars"></i><br> Male</button>
                 <button id="sex"><strong style="font-size: 90%;">Sex</strong> </button>
                 <button class="radio2" id="opt-female" onclick="radio('opt-female','opt-male',0,0); changeGender('Female')"><i class="fas fa-venus"></i><br> Female</button>
-                <div class="inline-textbox" id="age-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeAge()" type="number" min="14" max="60" step="1" placeholder="##" name="age" id="age"><div class="keep-right">Years old</div></div></div>
+                <div class="inline-textbox" id="age-textbox"> <div><strong>I am</strong> </div><div class="border">
+                    <input onchange="changeAge()" type="number" min="14" max="60" step="1" placeholder="##" name="age" id="age"><div class="keep-right">Years old</div></div></div>
                 <button class="next" onclick="next(1)">Next</button>
             </div>
             <div id="details2-page" class="white-box">
                 <h1>Please Enter the Following Details</h1>
-                <div class="inline-textbox" id="height-textbox"> <div><strong>I am</strong> </div><div class="border"><input onchange="changeHeight()" type="number" min="130" max="250" step="1" placeholder="##" name="height" id="height"><div class="keep-right">cm</div></div></div>
-                <div class="inline-textbox" id="weight-textbox"> <div><strong>and</strong> </div><div class="border"><input onchange="changeWeight()" type="number" min="40" max="140" step="1" placeholder="##" name="weight" id="weight"><div class="keep-right">kg</div></div></div>
+                <div class="inline-textbox" id="height-textbox"> <div><strong>I am</strong> </div><div class="border">
+                    <input onchange="changeHeight()" type="number" min="130" max="250" step="1" placeholder="##" name="height" id="height"><div class="keep-right">cm</div></div></div>
+                <div class="inline-textbox" id="weight-textbox"> <div><strong>and</strong> </div><div class="border">
+                    <input onchange="changeWeight()" type="number" min="40" max="140" step="1" placeholder="##" name="weight" id="weight"><div class="keep-right">kg</div></div></div>
                 <div id="activity-dropdown"><strong>Activity Level</strong></div>
                 <div id="border1">
                     <i class="fas fa-chevron-down" style="position: absolute; left:85%; bottom: 40%;"></i>

@@ -8,13 +8,13 @@ var diet = "Vegan"
 var numCoursesInMeal;
 
 window.onload = function () {
-    changeAge()
+    changeAge()  //the following functions are called in case the page is rereshed and the fields are still populated
     changeHeight()
     changeWeight()
     changeActivity()
 };
 
-
+//this function is used for all the radio buttons. in1 is the one that is selected, the others are deselected
 function radio(in1, in2, in3, in4){ //taking the 4 IDs of the elements involved
     var z=2 //this will be the number going into the for loop
     el1=document.getElementById(in1) //this is the element that is selected
@@ -37,6 +37,7 @@ function radio(in1, in2, in3, in4){ //taking the 4 IDs of the elements involved
         }
     }
 }
+//this function is called whenever going between pages. It takes parameter x which decides which page to show
 function next(x){
     if (x == 0) {
         document.getElementById("details1-page").style.display = "block"
@@ -106,11 +107,12 @@ function next(x){
 }
 
 
-
+//this is called whenever either of the sex radio buttons is clicked
 function changeGender(sexIn){
     sex=sexIn
     document.getElementById("sex1").innerText=sex
 }
+//whenever the age text box is changed, this function is called to change the variable age
 function changeAge(){
     if(document.getElementById("age").value == ""){
         age=0
@@ -120,6 +122,7 @@ function changeAge(){
     }
     document.getElementById("age1").innerText=age
 }
+//whenever the height text box is changed, this function is called to change the variable
 function changeHeight(){
     if(document.getElementById("height").value == ""){
         height=0
@@ -129,6 +132,7 @@ function changeHeight(){
     }
     document.getElementById("height1").innerText=height+" cm"
 }
+//whenever the weight text box is changed, this function is called to change the variable
 function changeWeight(){
     if(document.getElementById("weight").value == ""){
         weight=0
@@ -138,15 +142,17 @@ function changeWeight(){
     }
     document.getElementById("weight1").innerText=weight+" kg"
 }
-
+//called when the value of the dropdown changes
 function changeActivity(){
     activity=document.getElementById("activity-level").value
     document.getElementById("activity1").innerText=activity
 }
+//called when the aim radio buttons are clicked to change the aim variable
 function changeAim(aim1){
     aim=aim1
     document.getElementById("aim1").innerText=aim
 }
+//called whenever the diet radio buttons are clicked to change the diet variable
 function changeDiet(diet1){
     diet=diet1
     document.getElementById("diet1").innerText=diet
@@ -155,6 +161,7 @@ function changeDiet(diet1){
 var BMR
 var maintainance
 var calIntake =0
+//this function calculate BMR, maintainance and calorie intake, then outputs it to results page
 function calculateCalories(){
     console.log("Sex: " + sex, "Age: " + age, "Height: "+ height, "Weight: " + weight)
     console.log("Activity Level: " + activity, "Aim: " + aim, "Diet: "+diet)
@@ -195,6 +202,7 @@ var yourFinalBreakfast
 var yourFinalLunch
 var yourFinalDinner
 var overallNutrients
+//this function calculates the recomended quantities of macros and displays to results page
 function calculateMacros(){
     if (aim == "Lose Weight"){
         protienQuantity = weight * 2.2
@@ -220,10 +228,11 @@ function calculateMacros(){
     document.getElementById("c-intake").innerText = carbQuantity.toString()
     document.getElementById("c1-intake").innerText = carbQuantity.toString()
 
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawResultsChart);
+    google.charts.load("current", {packages:["corechart"]}); //loads pie chart script
+    google.charts.setOnLoadCallback(drawResultsChart); 
+    //this calls the drawResultsChart function once the pie chart script has been loaded
 }
-
+//this function defines the data to go in the pie chart and its design, then draws the chart
 function drawResultsChart(){
     var data = google.visualization.arrayToDataTable([
         ['Macronutrients', 'Quantitied (in grams)'],
@@ -238,7 +247,8 @@ function drawResultsChart(){
         legend: 'none',
 
     };
-    var chart = new google.visualization.PieChart(document.getElementById('pie-chart')); //pie-chart is the ID of the DIV i want the pie chart to be placed
+    var chart = new google.visualization.PieChart(document.getElementById('pie-chart')); 
+    //pie-chart is the ID of the DIV i want the pie chart to be placed
     chart.draw(data, courses);
 }
 
@@ -389,22 +399,23 @@ function createMeals() {
 
 }
 
+//this function is called to display a specific course in a meal
 function changeElement(whichMeal, whichCourse){
     var order = [yourFinalBreakfast, yourFinalLunch, yourFinalDinner]
-
+    //it firstly sets the arrows onclick events to recallt this function but with a different course in the same meal
     document.getElementById("left-arrow").onclick = function(){changeElement(whichMeal,whichCourse-1);}
     document.getElementById("right-arrow").onclick = function(){changeElement(whichMeal,whichCourse+1);}
-    
+    //as the arrows may have been hidden previously, they are both displayed
     document.getElementById("right-arrow").style.display="inline-block"
     document.getElementById("left-arrow").style.display="inline-block"
-    console.log(whichCourse, numCoursesInMeal)
+    //this if statement decides if tis the first course, and if so, hides the left arrow
     if (whichCourse==1){
         document.getElementById("left-arrow").style.display="none"
     }
-    if (whichCourse==numCoursesInMeal){
+    if (whichCourse==numCoursesInMeal){ //this checks if the current course is the last course and hides right arrow if so
         document.getElementById("right-arrow").style.display="none"
     }
-
+    // this if statement is used to change the title of the display meal page based on which meal is being displayed
     if(whichMeal == 1){
         document.getElementById("meal-title").innerText= "Sample Breakfast Meal"
     }
@@ -415,7 +426,7 @@ function changeElement(whichMeal, whichCourse){
         document.getElementById("meal-title").innerText= "Sample Dinner Meal"
     }
 
-
+    //the following code sets the HTML elements on the display meal page to the information in the specific course in the meal
     document.getElementById("course-number").innerHTML = "Course: "+whichCourse
     document.getElementById("course-number").style.display="inline-block;"
     document.getElementById("course-name").innerHTML = "<strong>"+order[whichMeal-1][whichCourse-1][0]+" - "+order[whichMeal-1][whichCourse-1][1]+"</strong> grams"
@@ -426,20 +437,21 @@ function changeElement(whichMeal, whichCourse){
     document.getElementById("course-img").src ="styles/assets/"+ order[whichMeal-1][whichCourse-1][6]
     
 }
-
+//this function is called to changed the HTML elements in the overview page
 function editOverview(){
+    //this for loop calculates and stores the total calories and macros in all the meals
     for (var i=0; i<4; i++){
         overallNutrients[i]=breakfastNutrients[i]+lunchNutrients[i]+dinnerNutrients[i]
     }
+
     document.getElementById("overview-calories").innerHTML = "Calories: <strong>"+ overallNutrients[0]+"</strong>"
     document.getElementById("overview-protein").innerHTML = "Protein: <strong>"+ overallNutrients[1] +"</strong> grams ("+Math.round((-100*(protienQuantity-overallNutrients[1]))/protienQuantity)+"% from recomended)"
     document.getElementById("overview-fats").innerHTML = "Fats: <strong>"+ overallNutrients[2] +"</strong> grams ("+Math.round((-100*(fatQuantity-overallNutrients[2]))/fatQuantity)+"% from recomended)"
     document.getElementById("overview-carbs").innerHTML = "Carbs: <strong>"+ overallNutrients[3] +"</strong> grams ("+Math.round((-100*(carbQuantity-overallNutrients[3]))/carbQuantity)+"% from recomended)"
 
-    
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawOverviewChart);
 }
+
+
 function drawOverviewChart(){
     var data1 = google.visualization.arrayToDataTable([
         ['Macronutrients', 'Quantities (in grams)'],

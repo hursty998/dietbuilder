@@ -81,7 +81,8 @@ header {
         height: 18%;
         font-size: 170%;
     }
-    #details1-page, #details2-page, #details3-page,#confirmation-page, #select-meal-page, #display-meal, #display-overview{
+    #details1-page, #details2-page, #details3-page,#confirmation-page,
+     #select-meal-page, #display-meal, #display-overview{
         height: 70%;
         min-height: 395px;
     }
@@ -561,7 +562,8 @@ header {
     }
 }
 
-#details1-page, #details2-page, #details3-page, #confirmation-page, #results-page, #select-meal-page, #display-meal, #display-overview{
+#details1-page, #details2-page, #details3-page, #confirmation-page, 
+#results-page, #select-meal-page, #display-meal, #display-overview{
     display: none;
 
 }
