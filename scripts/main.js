@@ -81,7 +81,6 @@ function next(x){
         calculateCalories()
         calculateMacros()
         document.getElementById("confirmation-page").style.display="none"
-        document.getElementById("details1-page").style.display="none"
         document.getElementById("select-meal-page").style.display="none"
         document.getElementById("results-page").style.display = "block"
         createMeals()
@@ -390,18 +389,19 @@ function createMeals() {
 
 }
 
-var mealNum
 function changeElement(whichMeal, whichCourse){
     var order = [yourFinalBreakfast, yourFinalLunch, yourFinalDinner]
 
     document.getElementById("left-arrow").onclick = function(){changeElement(whichMeal,whichCourse-1);}
     document.getElementById("right-arrow").onclick = function(){changeElement(whichMeal,whichCourse+1);}
+    
     document.getElementById("right-arrow").style.display="inline-block"
     document.getElementById("left-arrow").style.display="inline-block"
+    console.log(whichCourse, numCoursesInMeal)
     if (whichCourse==1){
         document.getElementById("left-arrow").style.display="none"
     }
-    else if (whichCourse==numCoursesInMeal){
+    if (whichCourse==numCoursesInMeal){
         document.getElementById("right-arrow").style.display="none"
     }
 
